@@ -1,6 +1,6 @@
 <?php
 //连接数据库
-require_once dirname(__DIR__).DIRECTORY_SEPARATOR."util"."DBHelper.php";
+require_once __DIR__.DIRECTORY_SEPARATOR."DBHelper.php";
 
 class Dao{
     private $conn;

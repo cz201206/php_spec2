@@ -9,14 +9,14 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <li class="nav-item">
+                <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="product_category.php"> 产品分类管理 </a>
 
             </li>
-            <li class="nav-item">
+            <li class="nav-item  active">
                 <a class="nav-link" href="product_spec_item.php"> 产品参数项管理 </a>
 
             </li>

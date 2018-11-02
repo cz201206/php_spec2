@@ -5,6 +5,6 @@ function getConn(){
     {
         die('Could not connect: ' . mysqli_error());
     }
-    mysqli_select_db($con,"loolsite_db");
+    mysqli_select_db($con,"db_specs");
     return $con;
 }

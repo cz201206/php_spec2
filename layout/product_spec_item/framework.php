@@ -7,7 +7,6 @@
 </head>
 <body>
 <?php require_once  __DIR__.DIRECTORY_SEPARATOR."nav.php" ?>
-<?php require_once  __DIR__.DIRECTORY_SEPARATOR."content.php" ?>
 <?php require_once  __DIR__.DIRECTORY_SEPARATOR."script.php" ?>
 </body>
 </html>
