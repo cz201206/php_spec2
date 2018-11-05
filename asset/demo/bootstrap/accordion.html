@@ -1,0 +1,21 @@
+<!--抽屉-->
+<div class="accordion" id="accordionExample"> <!-- 改id1 -->
+    <!-- 一层 -->
+    <div class="card">
+        <!-- 标题 -->
+        <div class="card-header" id="headingOne"> <!-- 改id2 -->
+            <h5 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> <!-- 对应 id3(data-target，aria-controls)-->
+                    Collapsible Group Item #1
+                </button>
+            </h5>
+        </div>
+        <!--  内容  -->
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample"> <!-- 改id3,对应 id2 (aria-labelledby),对应 id1 (data-parent) -->
+            <div class="card-body">
+                Anim pariatur cliche reprehenderit,
+            </div>
+        </div>
+    </div> <!-- card 复制结尾-->
+
+</div><!-- accordion 复制结尾-->
