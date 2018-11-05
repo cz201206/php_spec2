@@ -34,6 +34,19 @@
 
 </script>
 
+
+<script type="text/javascript">//点击事件
+
+    //导航栏点击事件
+    $(".a_ajax").click(
+        function () {
+            console.log($(this).attr("href"));
+            return false;
+        }
+    );
+
+</script>
+
 <script type="text/javascript">//调试信息
 
 </script>
