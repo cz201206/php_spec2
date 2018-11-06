@@ -13,20 +13,7 @@
 
 <script type="text/javascript">//函数定义
 
-    //绘制圆-图标
-    function drawCircle_icon() {
-        //context 样式
-        var grad  = ctx.createLinearGradient(0,0,0,100);
-        grad.addColorStop(0,'#ff0');    // 黄
-        grad.addColorStop(0.5,'#00f');  // 蓝
-        grad.addColorStop(1,'#0ff');    //青
-        ctx.fillStyle = grad;
-        //准备绘制
-        ctx.beginPath();
-        //指定圆参数
-        ctx.arc(10,13,<?=$radius?>,0,2*Math.PI);
-        ctx.fill();
-    }
+
 
 </script>
 
@@ -49,6 +36,18 @@
             return false;
         }
     );
+
+    //.cz_modify 点击事件
+    $(".cz_update").click(
+        function () {
+            var a = $(this).prev().attr("href");
+            var url = "controller/product_categoryController.php";
+            var data = dataFromAnchor( a );
+            data.action = "update";
+            $("#content").load(url,data);
+        }
+    );
+
 
 </script>
 

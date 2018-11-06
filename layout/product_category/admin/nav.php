@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">
-        <canvas id="canvas_Navbar" class="cz" width="<?=$lenghOfSide?>" height="<?=$lenghOfSide?>"></canvas>
+        <canvas id="canvas_Navbar" class="cz" width="20" height="20"></canvas>
         参数查询
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

@@ -19,15 +19,20 @@
         }
 
         //更新
-        function update($ID,$value0){
-            $SQL = "UPDATE `blood_glucose` SET `value0` = ? WHERE `blood_glucose`.`ID` = ?";
-            $params_types = "di";
-            $params = array($value0,$ID);
+        function update($ID,$title){
+            $SQL = "UPDATE `product_category` SET `title` = ? WHERE `ID` = ?";
+            $params_types = "si";
+            $params = array($title,$ID);
             return $this->execute($SQL, $params_types, $params);
         }
         //首页数据
         function index(){
             $SQL = "SELECT * FROM `blood_glucose` order by timeID asc  LIMIT 10";
+            return $this->query_toArray($SQL,null,null);
+        }
+        //全部数据
+        function all(){
+            $SQL = "SELECT `ID`, `name`, `title`, `rank` FROM `product_category` order by rank asc; ";
             return $this->query_toArray($SQL,null,null);
         }
 
