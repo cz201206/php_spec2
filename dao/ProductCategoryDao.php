@@ -1,14 +1,12 @@
 <?php
     require_once dirname(__DIR__).DIRECTORY_SEPARATOR."util".DIRECTORY_SEPARATOR."Dao.php";
 
-    Class Product_categoryDao extends Dao {
+    Class ProductCategoryDao extends Dao {
         // 插入数据
-        function insert($value0){
-            $time_insert = date("Y-m-d");
-            $timeID = date("Ymd");
-            $SQL="INSERT INTO `blood_glucose` (`ID`, `time_insert`, `time_update`, `value0`, `timeID`) values (NULL, '$time_insert', CURRENT_TIMESTAMP, ?, $timeID)";
-            $params_types = "d";
-            $params = array($value0);
+        function insert($title){
+            $SQL="INSERT INTO `product_category` (`ID`, `name`, `title`, `rank`) VALUES (NULL, NULL, ?, NULL)";
+            $params_types = "s";
+            $params = array($title);
             return $this->execute($SQL, $params_types, $params);
         }
 
