@@ -1,7 +1,7 @@
 <form id="view_product_category_update" method="post" action="controller/product_categoryController.php">
     <div class="form-group">
         <label for="input_title">修改产品分类</label>
-        <input name="title" type="text" class="form-control" id="input_title" aria-describedby="emailHelp" placeholder="输入产品分类名称">
+        <input name="title" type="text" class="form-control" id="input_title" aria-describedby="emailHelp" value="<?=$_POST['title']?>" placeholder="输入产品分类名称">
     </div>
     <input name="action" value="updateProcess" type="hidden"/>
     <input name="ID" value="<?=$_POST['ID']?>" type="hidden"/>
