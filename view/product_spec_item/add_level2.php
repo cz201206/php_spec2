@@ -1,7 +1,7 @@
 <form id="view_product_category_add" method="post" action="controller/product_spec_itemController.php">
 
     <div class="form-group">
-        <label for="input_title">参数项名称</label>
+        <label for="input_title">二级参数项名称</label>
         <input name="title" type="text" class="form-control" id="input_title" aria-describedby="emailHelp" placeholder="">
     </div>
 
@@ -12,6 +12,7 @@
 
     <input name="level" value="<?=$_POST['level']?>" type="hidden"/>
     <input name="product_category_ID" value="<?=$_POST['product_category_ID']?>" type="hidden"/>
+    <input name="parent_ID" value="<?=$_POST['parent_ID']?>" type="hidden"/>
     <input name="action" value="addProcess" type="hidden"/>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

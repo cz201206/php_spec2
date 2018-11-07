@@ -3,10 +3,10 @@
 
     Class ProductSpecItemDao extends Dao {
         // 插入数据
-        function insert($product_category_ID,$level,$rank,$title){
-            $SQL="INSERT INTO `product_spec_item` (`product_category_ID`, `level`, `rank`, `title`) VALUES (?, ?, ?, ?)";
-            $params_types = "iiis";
-            $params = array($product_category_ID,$level,$rank,$title);
+        function insert($product_category_ID,$level,$parent_ID,$rank,$title){
+            $SQL="INSERT INTO `product_spec_item` (`product_category_ID`, `level`,parent_ID, `rank`, `title`) VALUES (?, ?, ?, ?)";
+            $params_types = "iiiis";
+            $params = array($product_category_ID,$level,$parent_ID,$rank,$title);
             return $this->execute($SQL, $params_types, $params);
         }
 
@@ -30,13 +30,27 @@
             $SQL = "SELECT * FROM `blood_glucose` order by timeID asc  LIMIT 10";
             return $this->query_toArray($SQL,null,null);
         }
-        //全部数据
-        function all($product_category_ID){
+
+        //level1
+        function level1($product_category_ID){
             $SQL = "SELECT `ID`, `product_category_ID`, `level`, `rank`, `title`
                      FROM `product_spec_item` 
-                     where product_category_ID=$product_category_ID 
+                     where product_category_ID=? and level=1
                      order by rank asc; ";
-            return $this->query_toArray($SQL,null,null);
+            $params_types = "i";
+            $params = array($product_category_ID);
+            return $this->query_toArray($SQL,$params_types,$params);
+        }
+
+        //level2
+        function level2($product_category_ID,$parent_ID){
+            $SQL = "SELECT `ID`, `product_category_ID`, `level`, `rank`, `title`
+                     FROM `product_spec_item` 
+                     where product_category_ID=? and parent_ID=?
+                     order by rank asc; ";
+            $params_types = "ii";
+            $params = array($product_category_ID,$parent_ID);
+            return $this->query_toArray($SQL,$params_types,$params);
         }
 
         //附加信息

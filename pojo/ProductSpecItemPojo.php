@@ -17,6 +17,6 @@ class ProductSpecItemPojo
     public $product_category_ID;
     public $parent_ID;
 
-
+    public $children;
 
 }

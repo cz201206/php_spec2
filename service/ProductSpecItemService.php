@@ -15,17 +15,17 @@ class ProductSpecItemService
         $this->dao = new ProductSpecItemDao();
     }
 
-    public function addProcess($product_category_ID,$level,$rank,$title){
-        return $this->dao->insert($product_category_ID,$level,$rank,$title);
+    public function addProcess($product_category_ID,$level,$parent_ID,$rank,$title){
+        return $this->dao->insert($product_category_ID,$level,$parent_ID,$rank,$title);
     }
 
     public function updateProcess($ID,$title){
         return $this->dao->update($ID,$title);
     }
 
-    public function all($product_category_ID){
+    public function level1($product_category_ID){
         $pojos = [];
-        $array_ProductSpecItem = $this->dao->all($product_category_ID);
+        $array_ProductSpecItem = $this->dao->level1($product_category_ID);
         foreach ($array_ProductSpecItem as $ProductSpecItem ){
             $pojo = new ProductSpecItemPojo();
             $pojo->ID = $ProductSpecItem["ID"];
@@ -37,4 +37,31 @@ class ProductSpecItemService
         }
         return $pojos;
     }
+
+    public function level2($product_category_ID,$parent_ID){
+        $pojos = [];
+        $array_ProductSpecItem = $this->dao->level2($product_category_ID,$parent_ID);
+        foreach ($array_ProductSpecItem as $ProductSpecItem ){
+            $pojo = new ProductSpecItemPojo();
+            $pojo->ID = $ProductSpecItem["ID"];
+            $pojo->product_category_ID = $ProductSpecItem["product_category_ID"];
+            $pojo->level = $ProductSpecItem["level"];
+            $pojo->rank = $ProductSpecItem["rank"];
+            $pojo->title = $ProductSpecItem["title"];
+            $pojos[] = $pojo;
+        }
+        return $pojos;
+    }
+
+    public function accordion($product_category_ID){
+        //第一级节点
+        $pojos_level1 = $this->level1($product_category_ID);
+        foreach ($pojos_level1 as $pojo_level1){
+            $parent_ID = $pojo_level1->ID;
+            //相对应的二级节点
+            $pojo_level1->children = $this->level2($product_category_ID,$parent_ID);
+        }
+        return $pojos_level1;
+    }
+
 }

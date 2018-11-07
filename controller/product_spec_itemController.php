@@ -7,11 +7,14 @@ switch (@$_POST["action"]){
 
     //增加
     case "add":
-        require_once dirname(__DIR__).DIRECTORY_SEPARATOR."view".DIRECTORY_SEPARATOR."product_spec_item".DIRECTORY_SEPARATOR."add.php";
+        if($_POST["level"]==1)
+            require_once dirname(__DIR__).DIRECTORY_SEPARATOR."view".DIRECTORY_SEPARATOR."product_spec_item".DIRECTORY_SEPARATOR."add_level1.php";
+        else
+            require_once dirname(__DIR__).DIRECTORY_SEPARATOR."view".DIRECTORY_SEPARATOR."product_spec_item".DIRECTORY_SEPARATOR."add_level2.php";
         break;
     case "addProcess":
 
-        $result = $service->addProcess($_POST["product_category_ID"],$_POST["level"],$_POST["rank"],$_POST["title"]);
+        $result = $service->addProcess($_POST["product_category_ID"],$_POST["level"],$_POST["parent_ID"],$_POST["rank"],$_POST["title"]);
         if($result)echo "添加成功";
         else "添加失败";
 
