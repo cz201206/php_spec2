@@ -8,8 +8,16 @@
                 </li>
                 <?php foreach($pojos as $pojo){ ?>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <a  id="pojo_<?=$pojo->ID?>" href="product_spec_item.php?action=select&ID=<?=$pojo->ID?>&product_category_ID=<?=$pojo->ID?>&title=<?=$pojo->title?>"><?=$pojo->title?></a>
-                    <span class="cz_update oi oi-pencil badge-primary badge-pill" style="cursor: pointer;"></span>
+                    <a
+                        class="btn btn-primary"
+                        href="product_spec_item.php?action=select&ID=<?=$pojo->ID?>&product_category_ID=<?=$pojo->ID?>&title=<?=$pojo->title?>">
+                        <span id="pojo_<?=$pojo->ID?>"><?=$pojo->title?></span>
+                    </a>
+                    <div class="btn-group" role="group" >
+                        <button type="button" class="cz_update oi oi-pencil btn btn-secondary"></button>
+                    </div>
+
+
                 </li>
                 <?php }?>
             </ul>

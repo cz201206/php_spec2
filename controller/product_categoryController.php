@@ -5,7 +5,7 @@ $service = new ProductCategoryService();
 
 switch (@$_POST["action"]){
 
-    //增加
+    //增加参数项
     case "add":
         require_once dirname(__DIR__).DIRECTORY_SEPARATOR."view".DIRECTORY_SEPARATOR."product_category".DIRECTORY_SEPARATOR."add.php";
         break;

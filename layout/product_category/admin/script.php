@@ -40,7 +40,7 @@
     //.cz_modify 点击事件
     $(".cz_update").click(
         function () {
-            var a = $(this).prev().attr("href");
+            var a = $(this).parent().prev().attr("href");
             var url = "controller/product_categoryController.php";
             var data = dataFromAnchor( a );
             data.action = "update";

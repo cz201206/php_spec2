@@ -24,15 +24,13 @@
             return false;
         });
     });
-    var title_upadted;
     function showRequest(formData, jqForm, options) {
         //显示处理界面
         $("#content").html("处理中，请稍候...");
         title_upadted =formData[0]["value"];
     }
     function showResponse(responseText, statusText)  {
-        $("#pojo_<?=$_POST['ID']?>").html(title_upadted);
-        console.log(title_upadted);
+       window.location.reload();
     }
 
 </script>
