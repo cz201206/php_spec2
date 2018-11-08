@@ -38,7 +38,7 @@
         $("#content").html("处理中，请稍候...");
     }
     function showResponse(responseText, statusText)  {
-        //alert("Thank you for your comment!"+responseText);
+        window.location.reload();
     }
 
 </script>

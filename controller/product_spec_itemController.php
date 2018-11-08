@@ -29,10 +29,20 @@ switch (@$_POST["action"]){
         break;
     case "updateProcess":
         $result = $service->updateProcess($_POST["ID"],$_POST["title"],$_POST["rank"]);
-
         if($result)echo "修改成功";
         else "修改失败";
         break;
+
+    //删除
+    case "delete":
+        require_once dirname(__DIR__).DIRECTORY_SEPARATOR."view".DIRECTORY_SEPARATOR."product_spec_item".DIRECTORY_SEPARATOR."delete.php";
+        break;
+    case "deleteProcess":
+        $result = $service->deleteProcess($_POST["ID"]);
+        if($result)echo "删除成功";
+        else "删除失败";
+        break;
+
 }
 
 

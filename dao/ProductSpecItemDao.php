@@ -12,7 +12,7 @@
 
         //删除
         function delete($ID){
-            $SQL="DELETE FROM `blood_glucose` WHERE `blood_glucose`.`ID` = ?";
+            $SQL="DELETE FROM `product_spec_item` WHERE `ID` = ?";
             $params_types = "i";
             $params = array($ID);
             return $this->execute($SQL, $params_types, $params);

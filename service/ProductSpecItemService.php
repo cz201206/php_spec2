@@ -23,6 +23,10 @@ class ProductSpecItemService
         return $this->dao->update($ID,$title,$rank);
     }
 
+    public function deleteProcess($ID){
+        return $this->dao->delete($ID);
+    }
+
     public function level1($product_category_ID){
         $pojos = [];
         $array_ProductSpecItem = $this->dao->level1($product_category_ID);

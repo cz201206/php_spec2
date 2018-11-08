@@ -8,7 +8,7 @@
                 </li>
                 <?php foreach($pojos as $pojo){ ?>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <a  id="pojo_<?=$pojo->ID?>" href="product_spec_item.php?action=select&product_category_ID=<?=$pojo->ID?>&title=<?=$pojo->title?>"><?=$pojo->title?></a>
+                    <a  id="pojo_<?=$pojo->ID?>" href="product_spec_item.php?action=select&ID=<?=$pojo->ID?>&product_category_ID=<?=$pojo->ID?>&title=<?=$pojo->title?>"><?=$pojo->title?></a>
                     <span class="cz_update oi oi-pencil badge-primary badge-pill" style="cursor: pointer;"></span>
                 </li>
                 <?php }?>

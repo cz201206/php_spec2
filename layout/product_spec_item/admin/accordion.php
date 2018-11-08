@@ -7,6 +7,8 @@
             <!-- 标题 -->
             <div class="card-header" id="heading<?=$key?>"> <!-- 改id2 -->
                 <h5 class="mb-0">
+
+
                     <a id="level1_<?=$level1->ID?>"
                        class="btn btn-link"
                        href="product_spec_item.php?action=update&ID=<?=$level1->ID?>&title=<?=$level1->title?>&rank=<?=$level1->rank?>"
@@ -14,7 +16,8 @@
                         <?=$level1->title?>
                     </a>
 
-                    <span class="cz_update oi oi-pencil badge-primary badge-pill" style="cursor: pointer;"></span>
+                    <span class="align-bottom float-right cz_update oi oi-pencil badge-primary badge-pill" style="cursor: pointer;margin-top: 8px;"></span>
+
                 </h5>
             </div>
             <!--  内容  -->
@@ -27,7 +30,8 @@
 
                             <li class="list-group-item">
                                 <span href="product_spec_item.php?action=update&ID=<?=$level2->ID?>&title=<?=$level2->title?>&rank=<?=$level2->rank?>"> <?=$level2->title?></span>
-                                <span class="cz_update oi oi-pencil badge-primary badge-pill" style="cursor: pointer;"></span>
+                                <span class="float-right cz_update oi oi-pencil badge-primary badge-pill" style="cursor: pointer;margin-top: 2px;"></span>&nbsp;
+                                <span class="float-right cz_delete oi oi-delete badge-danger badge-pill" style="cursor: pointer;margin-top: 2px;"></span>
                             </li>
 
                         <?php }?>
@@ -39,3 +43,4 @@
     <?php }?>
 
 </div><!-- accordion 复制结尾-->
+

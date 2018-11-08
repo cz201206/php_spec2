@@ -42,6 +42,18 @@
     );
 
 
+    //.cz_delete 点击事件
+    $(".cz_delete").click(
+        function () {
+            var a = $(this).prev().prev().attr("href");
+            var url = "controller/product_spec_itemController.php";
+            var data = dataFromAnchor( a );
+            data.action = "delete";
+            $("#content").load(url,data);
+        }
+    );
+
+
 </script>
 
 <script type="text/javascript">//函数执行

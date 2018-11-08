@@ -6,4 +6,3 @@
 
 <div id="div_table1"></div>
 
-<span class="oi oi-plus"></span>
