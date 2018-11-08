@@ -16,7 +16,7 @@
                 {title:"屏幕",
                     l2:
                         [
-                            {title:"长",spec:"2cm"},
+                            {title:"长",spec:"4cm"},
                             {title:"宽",spec:"3cm"}
                         ]
                 },
@@ -25,6 +25,30 @@
                     l2:
                         [
                             {title:"运行内存",spec:"6GB"},
+                            {title:"存储内存",spec:"64GB"}
+                        ]
+                }
+
+
+            ]
+        };
+
+    var obj1 =
+        {title:"红米5",l1:
+            [
+
+                {title:"屏幕",
+                    l2:
+                        [
+                            {title:"长",spec:"2cm"},
+                            {title:"宽",spec:"3cm"}
+                        ]
+                },
+
+                {title:"存储",
+                    l2:
+                        [
+                            {title:"运行内存",spec:"4GB"},
                             {title:"存储内存",spec:"64GB"}
                         ]
                 }
@@ -58,7 +82,7 @@
 
         for(i_l1 in obj.l1 ){
             //一级
-            l1 = obj.l1[i_l1]; console.log(l1.title);
+            l1 = obj.l1[i_l1];
             //一级标题
             var l1_title_ele = $("<div>"+l1.title+"</div>");
             $("#content").append(l1_title_ele);
@@ -79,24 +103,53 @@
 
     }
 
-    function fillData() {
+    function fillData(obj,position) {
 
         for(i_l1 in obj.l1 ){
             //一级
-            l1 = obj.l1[i_l1]; console.log(l1.title);
+            l1 = obj.l1[i_l1];
 
             //一级详情
             var table_id = "table_"+i_l1;
 
             for(i_l2 in l1.l2){
                 var l2 = l1.l2[i_l2];
-                $("#"+table_id).find("tr").eq(i_l2).find("td").eq(1).html(l2.spec);
+                $("#"+table_id).find("tr").eq(i_l2).find("td").eq(position).html(l2.spec);
             }
 
         }
 
     }
 
+    function td_contrast() {
+        var table_0 = $("#table_1");
+        $("table").each(function () {
+            $(this).find("tr").each(
+                function () {
+
+                    var tdArr = $(this).children();
+                    var td1 = tdArr.eq(1);
+                    var td2 = tdArr.eq(2);
+                    if(td1.html().trim()!=td2.html().trim()){
+                        $(this).addClass("different");
+                    }
+                }
+            );
+        });
+
+    }
+
+    $("#cbCheckbox1").click(function () {
+                 if ($(this).prop("checked")) {//jquery 1.6以前版本 用  $(this).attr("checked")
+                     td_contrast();
+                     } else {
+                       $(".different").each(
+                           function () {
+                               $(this).removeClass("different");
+                           }
+                       );
+                     }
+      });
 </script>
 
 <script type="text/javascript">//点击事件
@@ -109,8 +162,10 @@
 <script type="text/javascript">//函数执行
 
     drawCircle_icon();
-    createTable(1);
-    fillData();
+    createTable(2);
+    fillData(obj,1);
+    fillData(obj1,2);
+    td_contrast();
 </script>
 
 <script type="text/javascript">//调试信息

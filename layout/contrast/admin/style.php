@@ -6,4 +6,8 @@
         text-align: right;
         padding-right:5px;
     }
+    .different{
+        background-color: red;
+        color:white;
+    }
 </style>
