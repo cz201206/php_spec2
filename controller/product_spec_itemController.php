@@ -25,10 +25,11 @@ switch (@$_POST["action"]){
 
     //更新
     case "update":
-        require_once dirname(__DIR__).DIRECTORY_SEPARATOR."view".DIRECTORY_SEPARATOR."product_category".DIRECTORY_SEPARATOR."update.php";
+        require_once dirname(__DIR__).DIRECTORY_SEPARATOR."view".DIRECTORY_SEPARATOR."product_spec_item".DIRECTORY_SEPARATOR."update.php";
         break;
     case "updateProcess":
-        $result = $service->updateProcess($_POST["ID"],$_POST["title"]);
+        $result = $service->updateProcess($_POST["ID"],$_POST["title"],$_POST["rank"]);
+
         if($result)echo "修改成功";
         else "修改失败";
         break;

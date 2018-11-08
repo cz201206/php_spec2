@@ -4,7 +4,7 @@
     Class ProductSpecItemDao extends Dao {
         // 插入数据
         function insert($product_category_ID,$level,$parent_ID,$rank,$title){
-            $SQL="INSERT INTO `product_spec_item` (`product_category_ID`, `level`,parent_ID, `rank`, `title`) VALUES (?, ?, ?, ?)";
+            $SQL="INSERT INTO `product_spec_item` (`product_category_ID`, `level`,parent_ID, `rank`, `title`) VALUES (?, ?, ?, ?, ?)";
             $params_types = "iiiis";
             $params = array($product_category_ID,$level,$parent_ID,$rank,$title);
             return $this->execute($SQL, $params_types, $params);
@@ -19,10 +19,10 @@
         }
 
         //更新
-        function update($ID,$title){
-            $SQL = "UPDATE `product_category` SET `title` = ? WHERE `ID` = ?";
-            $params_types = "si";
-            $params = array($title,$ID);
+        function update($ID,$title,$rank){
+            $SQL = "UPDATE `product_spec_item` SET `title` = ? , rank=? WHERE `ID` = ?";
+            $params_types = "sii";
+            $params = array($title,$rank,$ID);
             return $this->execute($SQL, $params_types, $params);
         }
         //首页数据

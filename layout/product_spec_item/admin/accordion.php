@@ -7,9 +7,14 @@
             <!-- 标题 -->
             <div class="card-header" id="heading<?=$key?>"> <!-- 改id2 -->
                 <h5 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<?=$key?>" aria-expanded="true" aria-controls="collapse<?=$key?>"> <!-- 对应 id3(data-target，aria-controls)-->
+                    <a id="level1_<?=$level1->ID?>"
+                       class="btn btn-link"
+                       href="product_spec_item.php?action=update&ID=<?=$level1->ID?>&title=<?=$level1->title?>&rank=<?=$level1->rank?>"
+                       type="button" data-toggle="collapse" data-target="#collapse<?=$key?>" aria-expanded="true" aria-controls="collapse<?=$key?>"> <!-- 对应 id3(data-target，aria-controls)-->
                         <?=$level1->title?>
-                    </button>
+                    </a>
+
+                    <span class="cz_update oi oi-pencil badge-primary badge-pill" style="cursor: pointer;"></span>
                 </h5>
             </div>
             <!--  内容  -->
@@ -20,7 +25,10 @@
 
                         <?php foreach($level1->children as $key=>$level2){ ?>
 
-                            <li class="list-group-item"> <a href="<?=$level2->ID?>"> <?=$level2->title?></a></li>
+                            <li class="list-group-item">
+                                <span href="product_spec_item.php?action=update&ID=<?=$level2->ID?>&title=<?=$level2->title?>&rank=<?=$level2->rank?>"> <?=$level2->title?></span>
+                                <span class="cz_update oi oi-pencil badge-primary badge-pill" style="cursor: pointer;"></span>
+                            </li>
 
                         <?php }?>
                     </ul>

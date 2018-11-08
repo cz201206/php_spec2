@@ -19,8 +19,8 @@ class ProductSpecItemService
         return $this->dao->insert($product_category_ID,$level,$parent_ID,$rank,$title);
     }
 
-    public function updateProcess($ID,$title){
-        return $this->dao->update($ID,$title);
+    public function updateProcess($ID,$title,$rank){
+        return $this->dao->update($ID,$title,$rank);
     }
 
     public function level1($product_category_ID){

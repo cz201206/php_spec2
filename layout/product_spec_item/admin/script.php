@@ -34,7 +34,7 @@
     $(".cz_update").click(
         function () {
             var a = $(this).prev().attr("href");
-            var url = "controller/product_categoryController.php";
+            var url = "controller/product_spec_itemController.php";
             var data = dataFromAnchor( a );
             data.action = "update";
             $("#content").load(url,data);

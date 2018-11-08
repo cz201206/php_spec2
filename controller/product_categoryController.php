@@ -21,6 +21,7 @@ switch (@$_POST["action"]){
         break;
     case "updateProcess":
         $result = $service->updateProcess($_POST["ID"],$_POST["title"]);
+
         if($result)echo "修改成功";
         else "修改失败";
         break;
