@@ -121,8 +121,8 @@
 
     }
 
-    function td_contrast() {
-        var table_0 = $("#table_1");
+    function highLightDifferent() {
+
         $("table").each(function () {
             $(this).find("tr").each(
                 function () {
@@ -136,26 +136,54 @@
                 }
             );
         });
-
     }
 
-    $("#cbCheckbox1").click(function () {
-                 if ($(this).prop("checked")) {//jquery 1.6以前版本 用  $(this).attr("checked")
-                     td_contrast();
-                     } else {
-                       $(".different").each(
-                           function () {
-                               $(this).removeClass("different");
-                           }
-                       );
-                     }
-      });
+    function hideSame() {
+        $("table").each(function () {
+            $(this).find("tr").each(
+                function () {
+
+                    var tdArr = $(this).children();
+                    var td1 = tdArr.eq(1);
+                    var td2 = tdArr.eq(2);
+                    if(td1.html().trim()===td2.html().trim()){
+                        $(this).addClass("cz_same");
+                    }
+                }
+            );
+        });
+    }
+
 </script>
 
 <script type="text/javascript">//点击事件
 
 
+    //控制高亮
+    $("#cbCheckbox1").click(function () {
+        if ($(this).prop("checked")) {//jquery 1.6以前版本 用  $(this).attr("checked")
+            highLightDifferent();
+        } else {
+            $(".different").each(
+                function () {
+                    $(this).removeClass("different");
+                }
+            );
+        }
+    });
 
+    //控制隐藏相同项
+    $("#cbCheckbox2").click(function () {
+        if ($(this).prop("checked")) {//jquery 1.6以前版本 用  $(this).attr("checked")
+            hideSame();
+        } else {
+            $(".cz_same").each(
+                function () {
+                    $(this).removeClass("cz_same");
+                }
+            );
+        }
+    });
 
 </script>
 
@@ -165,7 +193,7 @@
     createTable(2);
     fillData(obj,1);
     fillData(obj1,2);
-    td_contrast();
+
 </script>
 
 <script type="text/javascript">//调试信息

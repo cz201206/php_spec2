@@ -10,4 +10,8 @@
         background-color: red;
         color:white;
     }
+
+    .cz_same{
+        display: none;
+    }
 </style>
