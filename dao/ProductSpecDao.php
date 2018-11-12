@@ -3,12 +3,11 @@
 
     Class ProductSpecDao extends Dao {
         // 插入数据
-        function insert($title,$spec,$rank,$product_category_ID){
-            $SQL="INSERT INTO `product_spec` ( `title`, `spec`, `rank`,`product_category_ID`) VALUES (?, ?, ?, ?)";
-            $params_types = "ssii";
-            $params = array($title,$spec,$rank,$product_category_ID);
-            echo "<pre>";
-            var_dump($params);
+        function insert($title,$rank,$product_category_ID,$spec){
+            $SQL="INSERT INTO `product_spec` ( `title`, `rank`,`product_category_ID`,`spec`) VALUES (?, ?, ?, ?)";
+            $params_types = "siis";
+            $params = array($title,$rank,$product_category_ID,$spec);
+
             return $this->execute($SQL, $params_types, $params);
         }
 
@@ -44,6 +43,12 @@
             return $this->query_toArray($SQL,$params_types,$params);
         }
 
+        function pojo($ID){
+            $SQL = "select * from  `product_spec` WHERE `ID` = ?";
+            $params_types = "i";
+            $params = array($ID);
+            return $this->query_toArray($SQL, $params_types, $params)[0];
+        }
         //level2
         function level2($product_category_ID,$parent_ID){
             $SQL = "SELECT `ID`, `product_category_ID`, `level`, `rank`, `title`
@@ -57,7 +62,15 @@
 
         function struct($product_category_ID){
             $SQL = "
-            SELECT item1.title title1,item2.title title2 from product_spec_item item1 
+            SELECT 
+            
+            item1.title title1,
+            item2.title title2, 
+            
+            item1.name name1,
+            item2.name name2 
+            
+            from product_spec_item item1 
             right JOIN product_spec_item item2 
             on item2.parent_ID = item1.ID
             WHERE item1.product_category_ID=?
@@ -66,7 +79,12 @@
             $params = array($product_category_ID);
             return $this->query_toArray($SQL,$params_types,$params);
         }
-
+        function list_($product_category_ID){
+            $SQL = "SELECT title,ID,product_category_ID  FROM product_spec WHERE product_category_ID=? order by rank desc;";
+            $params_types = "i";
+            $params = array($product_category_ID);
+            return $this->query_toArray($SQL,$params_types,$params);
+        }
         //region 附加信息
 
         function count(){
@@ -75,7 +93,7 @@
         }
 
         function info(){
-            $SQL = "SELECT category.ID, category.title,(SELECT COUNT(ID) from product_spec spec where category.ID = spec.ID ) count from product_category category";
+            $SQL = "SELECT category.ID, category.title,(SELECT COUNT(ID) from product_spec spec where spec.product_category_ID = category.ID  ) count from product_category category";
             return $this->query_toArray($SQL,null,null);
         }
 

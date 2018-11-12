@@ -29,12 +29,21 @@ class ProductSpecService
         return $pojos;
     }
 
-    function add($title,$spec,$rank,$product_category_ID){
-        return $this->dao->insert($title,$spec,$rank,$product_category_ID);
+
+    function add($title,$rank,$product_category_ID,$spec){
+        return $this->dao->insert($title,$rank,$product_category_ID,$spec);
     }
 
     function struct($product_category_ID){
         return $this->dao->struct($product_category_ID);
+    }
+
+    function list_($product_category_ID){
+        return $this->dao->list_($product_category_ID);
+    }
+
+    function pojo($ID){
+        return $this->dao->pojo($ID);
     }
 
 }

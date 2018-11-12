@@ -1,5 +1,5 @@
 <form id="view_product_spec_add" method="post" action="controller/product_specController.php">
-    新增<?=$_POST["title"]?>参数
+    修改参数
     <div class="form-group">
         <label >产品名称</label>
         <input name="title"  type="text" class="form-control"></input>
@@ -7,7 +7,7 @@
     <?php foreach($structs as $struct){ ?>
     <div class="form-group">
         <label for="input_title"><?=$struct["title2"];?></label>
-        <textarea warp name="<?=$struct["name2"];?>"  class="form-control"></textarea>
+        <textarea name="<?=$struct["name2"];?>"  class="form-control"></textarea>
     </div>
     <?php }?>
     <div class="form-group">
@@ -19,6 +19,14 @@
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
+
+
+<script type="text/javascript">
+    alert("d");
+    var data = <?=$pojo['spec']?>;
+
+
+</script>
 
 <script>
     //ajax上传文件

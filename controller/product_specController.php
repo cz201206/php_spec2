@@ -17,7 +17,6 @@ function l2($title,$spec){
 }
 
 $service = new ProductSpecService();
-
 switch (@$_POST["action"]){
 
     //增加
@@ -28,37 +27,25 @@ switch (@$_POST["action"]){
         break;
     case "addProcess":
 
-        $product["title"] = urlencode($_POST["title"]);
-        $product["l1"] = [];
+        unset($_POST['action']);
+        $spec = json($_POST);
 
-        //原始数据
-        $spec = $_POST["spec"];
-        $structs = $service->struct($_POST["product_category_ID"]);
-
-        $l1_title = $structs[0]["title1"];
-        $l2s = [];
-        foreach ($structs as $key=>$struct){
-            //换下个一级参数项
-            if($l1_title!=$struct["title1"] ){
-
-                $product["l1"][] = l1(urlencode($l1_title),$l2s);
-                //初始化
-                $l1_title = $struct["title1"];
-                unset($l2s);
-            }
-            $l2s[] = l2($struct["title2"],$spec[$key]);
-
-            if(($key+1)==sizeof($structs)){
-                $product["l1"][] = l1(urlencode($l1_title),$l2s);
-            }
-        }
-
-        $product = urldecode(json_encode($product));
-
-        $service->add($_POST["title"],$product,$_POST["rank"],$_POST["product_category_ID"]);
+        $service->add($_POST["title"],$_POST["rank"],$_POST["product_category_ID"],$spec);
 
         break;
-    case "select":
+
+    case "list":
+        $pojos = $service->list_($_POST["product_category_ID"]);
+        require_once dirname(__DIR__).DIRECTORY_SEPARATOR."view".DIRECTORY_SEPARATOR."product_spec".DIRECTORY_SEPARATOR."list.php";
+        break;
+
+    case "find":
+        $structs = $service->struct($_POST["product_category_ID"]);
+        $pojo = $service->pojo($_POST["ID"]);
+        require_once dirname(__DIR__).DIRECTORY_SEPARATOR."view".DIRECTORY_SEPARATOR."product_spec".DIRECTORY_SEPARATOR."find.php";
+        break;
+
+    case "XX":
 
         break;
 
