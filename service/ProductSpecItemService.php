@@ -1,6 +1,7 @@
 <?php
 require_once dirname(__DIR__).DIRECTORY_SEPARATOR."dao".DIRECTORY_SEPARATOR."ProductSpecItemDao.php";
 require_once dirname(__DIR__).DIRECTORY_SEPARATOR."pojo".DIRECTORY_SEPARATOR."ProductSpecItemPojo.php";
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR."util".DIRECTORY_SEPARATOR."ChinesePinyin.class.php";
 /**
  * Created by PhpStorm.
  * User: cz
@@ -9,14 +10,17 @@ require_once dirname(__DIR__).DIRECTORY_SEPARATOR."pojo".DIRECTORY_SEPARATOR."Pr
  */
 class ProductSpecItemService
 {
+    public $ChinesePinyin;
     public $dao;
     function __construct()
     {
         $this->dao = new ProductSpecItemDao();
+        $this->ChinesePinyin = new ChinesePinyin();
     }
 
     public function addProcess($product_category_ID,$level,$parent_ID,$rank,$title){
-        return $this->dao->insert($product_category_ID,$level,$parent_ID,$rank,$title);
+        $name = $this->ChinesePinyin->TransformWithoutTonedeleteCode($title);
+        return $this->dao->insert($product_category_ID,$level,$parent_ID,$rank,$title,$name);
     }
 
     public function updateProcess($ID,$title,$rank){

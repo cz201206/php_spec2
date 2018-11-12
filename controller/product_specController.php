@@ -54,8 +54,8 @@ switch (@$_POST["action"]){
         }
 
         $product = urldecode(json_encode($product));
-        echo "<pre>";
-        var_dump($product);
+
+        $service->add($_POST["title"],$product,$_POST["rank"],$_POST["product_category_ID"]);
 
         break;
     case "select":

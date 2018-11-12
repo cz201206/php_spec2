@@ -13,7 +13,7 @@
                        class="btn btn-link"
                        href="product_spec_item.php?action=update&ID=<?=$level1->ID?>&title=<?=$level1->title?>&rank=<?=$level1->rank?>"
                        type="button" data-toggle="collapse" data-target="#collapse<?=$key?>" aria-expanded="true" aria-controls="collapse<?=$key?>"> <!-- 对应 id3(data-target，aria-controls)-->
-                        <?=$level1->title?>
+                        <?=$level1->rank?>.<?=$level1->title?>
                     </a>
 
                     <span class="align-bottom float-right cz_update oi oi-pencil badge-primary badge-pill" style="cursor: pointer;margin-top: 8px;"></span>
@@ -29,7 +29,7 @@
                         <?php foreach($level1->children as $key=>$level2){ ?>
 
                             <li class="list-group-item">
-                                <span href="product_spec_item.php?action=update&ID=<?=$level2->ID?>&title=<?=$level2->title?>&rank=<?=$level2->rank?>"> <?=$level2->title?></span>
+                                <span href="product_spec_item.php?action=update&ID=<?=$level2->ID?>&title=<?=$level2->title?>&rank=<?=$level2->rank?>"> <?=$level2->rank?>.<?=$level2->title?></span>
                                 <span class="float-right cz_update oi oi-pencil badge-primary badge-pill" style="cursor: pointer;margin-top: 2px;"></span>&nbsp;
                                 <span class="float-right cz_delete oi oi-delete badge-danger badge-pill" style="cursor: pointer;margin-top: 2px;"></span>
                             </li>

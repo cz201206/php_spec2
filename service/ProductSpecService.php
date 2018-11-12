@@ -29,6 +29,10 @@ class ProductSpecService
         return $pojos;
     }
 
+    function add($title,$spec,$rank,$product_category_ID){
+        return $this->dao->insert($title,$spec,$rank,$product_category_ID);
+    }
+
     function struct($product_category_ID){
         return $this->dao->struct($product_category_ID);
     }

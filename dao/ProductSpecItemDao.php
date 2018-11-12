@@ -3,10 +3,10 @@
 
     Class ProductSpecItemDao extends Dao {
         // 插入数据
-        function insert($product_category_ID,$level,$parent_ID,$rank,$title){
-            $SQL="INSERT INTO `product_spec_item` (`product_category_ID`, `level`,parent_ID, `rank`, `title`) VALUES (?, ?, ?, ?, ?)";
-            $params_types = "iiiis";
-            $params = array($product_category_ID,$level,$parent_ID,$rank,$title);
+        function insert($product_category_ID,$level,$parent_ID,$rank,$title,$name){
+            $SQL="INSERT INTO `product_spec_item` (`product_category_ID`, `level`,parent_ID, `rank`, `title`, `name`) VALUES (?, ?, ?, ?, ?, ?)";
+            $params_types = "iiiiss";
+            $params = array($product_category_ID,$level,$parent_ID,$rank,$title,$name);
             return $this->execute($SQL, $params_types, $params);
         }
 
