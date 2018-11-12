@@ -1,5 +1,21 @@
 <?php
 require_once dirname(__DIR__).DIRECTORY_SEPARATOR."service".DIRECTORY_SEPARATOR."ProductSpecService.php";
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR."util".DIRECTORY_SEPARATOR."fn.php";
+
+function l1($title,$l2){
+    $l1["title"] = $title;
+    $l1["l2"] = $l2;
+    return $l1;
+}
+
+function l2($title,$spec){
+    $urlEncode_title = urlencode("title");
+    $urlEncode_spec = urlencode("spec");
+    $l2[$urlEncode_title] = urlencode($title);
+    $l2[$urlEncode_spec] = urlencode($spec);
+    return $l2;
+}
+
 $service = new ProductSpecService();
 
 switch (@$_POST["action"]){
@@ -12,19 +28,7 @@ switch (@$_POST["action"]){
         break;
     case "addProcess":
 
-        function l1($title,$l2){
-            $l1["title"] = $title;
-            $l1["l2"] = $l2;
-            return $l1;
-        }
-
-        function l2($title,$spec){
-            $l2["title"] = $title;
-            $l2["spec"] = $spec;
-            return $l2;
-        }
-
-        $product["title"] = "某个产品";
+        $product["title"] = urlencode($_POST["title"]);
         $product["l1"] = [];
 
         //原始数据
@@ -37,7 +41,7 @@ switch (@$_POST["action"]){
             //换下个一级参数项
             if($l1_title!=$struct["title1"] ){
 
-                $product["l1"][] = l1($l1_title,$l2s);
+                $product["l1"][] = l1(urlencode($l1_title),$l2s);
                 //初始化
                 $l1_title = $struct["title1"];
                 unset($l2s);
@@ -45,10 +49,11 @@ switch (@$_POST["action"]){
             $l2s[] = l2($struct["title2"],$spec[$key]);
 
             if(($key+1)==sizeof($structs)){
-                $product["l1"][] = l1($l1_title,$l2s);
+                $product["l1"][] = l1(urlencode($l1_title),$l2s);
             }
         }
 
+        $product = urldecode(json_encode($product));
         echo "<pre>";
         var_dump($product);
 

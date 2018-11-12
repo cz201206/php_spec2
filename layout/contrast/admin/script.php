@@ -9,53 +9,10 @@
     //canvas js 对象
     var ctx=canvas_Navbar[0].getContext("2d");
 
-    var obj =
-        {title:"小米8",l1:
-            [
-
-                {title:"屏幕",
-                    l2:
-                        [
-                            {title:"长",spec:"4cm"},
-                            {title:"宽",spec:"3cm"}
-                        ]
-                },
-
-                {title:"存储",
-                    l2:
-                        [
-                            {title:"运行内存",spec:"6GB"},
-                            {title:"存储内存",spec:"64GB"}
-                        ]
-                }
+    var obj ={"title":"小米8","l1":[{"title":"外观","l2":[{"title":"长","spec":"1mm"},{"title":"宽","spec":"2mm"},{"title":"高","spec":"3mm"}]},{"title":"屏幕","l2":[{"title":"亮度","spec":"4nit"},{"title":"材质","spec":"材质1"}]},{"title":"存储","l2":[{"title":"运行内存","spec":"8G"},{"title":"存储内存","spec":"128G"}]},{"title":"网络","l2":[{"title":"GSM","spec":"b1,b2"}]}]};
+    var obj1 ={"title":"小米8 青春版","l1":[{"title":"外观","l2":[{"title":"长","spec":"2mm"},{"title":"宽","spec":"2mm"},{"title":"高","spec":"3mm"}]},{"title":"屏幕","l2":[{"title":"亮度","spec":"4nit"},{"title":"材质","spec":"材质1"}]},{"title":"存储","l2":[{"title":"运行内存","spec":"8G"},{"title":"存储内存","spec":"64G"}]},{"title":"网络","l2":[{"title":"GSM","spec":"b1,b2"}]}]};
 
 
-            ]
-        };
-
-    var obj1 =
-        {title:"红米5",l1:
-            [
-
-                {title:"屏幕",
-                    l2:
-                        [
-                            {title:"长",spec:"2cm"},
-                            {title:"宽",spec:"3cm"}
-                        ]
-                },
-
-                {title:"存储",
-                    l2:
-                        [
-                            {title:"运行内存",spec:"4GB"},
-                            {title:"存储内存",spec:"64GB"}
-                        ]
-                }
-
-
-            ]
-        };
 
 </script>
 

@@ -1,5 +1,9 @@
 <form id="view_product_spec_add" method="post" action="controller/product_specController.php">
     新增<?=$_POST["title"]?>参数
+    <div class="form-group">
+        <label >产品名称</label>
+        <input type="text" name="title"  class="form-control"></input>
+    </div>
     <?php foreach($structs as $struct){ ?>
     <div class="form-group">
         <label for="input_title"><?=$struct["title2"];?></label>
