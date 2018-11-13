@@ -79,12 +79,21 @@
             $params = array($product_category_ID);
             return $this->query_toArray($SQL,$params_types,$params);
         }
+
         function list_($product_category_ID){
             $SQL = "SELECT title,ID,product_category_ID  FROM product_spec WHERE product_category_ID=? order by rank desc;";
             $params_types = "i";
             $params = array($product_category_ID);
             return $this->query_toArray($SQL,$params_types,$params);
         }
+
+        function all_by_category($product_category_ID){
+            $SQL = "SELECT *  FROM product_spec WHERE product_category_ID=? order by rank desc;";
+            $params_types = "i";
+            $params = array($product_category_ID);
+            return $this->query_toArray($SQL,$params_types,$params);
+        }
+
         //region 附加信息
 
         function count(){

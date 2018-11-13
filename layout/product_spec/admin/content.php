@@ -15,15 +15,20 @@
 
 
                         <div class="btn-group" role="group" >
-                            <button type="button" class="cz_add oi oi-plus btn btn-secondary"
+                            <button type="button" class="cz_add btn btn-secondary"
                                     data-controller="product_specController.php"
                                     data-data='{"product_category_ID":"<?=$pojo->ID?>","title":"<?=$pojo->title?>"}'
-                            > </button>
+                            > <span class=" oi oi-plus "></span></button>
+                            <button class="cz_publish btn btn-primary"
+                                    data-controller="product_specController.php"
+                                    data-data='{"action":"publish","product_category_ID":"<?=$pojo->ID?>","title":"<?=$pojo->title?>"}'>
+                                发布</button>
                         </div>
 
 
                     </li>
                 <?php }?>
+
             </ul>
         </div>
         <div class="col-9">

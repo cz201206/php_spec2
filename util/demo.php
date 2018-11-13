@@ -4,7 +4,7 @@ include 'ChinesePinyin.class.php';
 
 $Pinyin = new ChinesePinyin();
 
-$words = '汉字转成拼音类闫君军均菌深圳（前置）';
+$words = '小米mix3（豪华版）(1234)';
 echo '<h2>'.$words.'</h2>';
 
 

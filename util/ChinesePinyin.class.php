@@ -79,7 +79,7 @@ class ChinesePinyin{
 
 
 	
-	public function TransformWithoutTonedeleteCode($input_char,$delimiter='',$outside_ignore=true){
+	public function TransformWithoutTonedeleteCode($input_char,$delimiter='',$outside_ignore=false){
         $str = $this->TransformWithoutTone($input_char,$delimiter,$outside_ignore);
         //中文标点
         $char = " 。、！？：；﹑•＂…‘’“”〝〞∕¦‖—　〈〉﹞﹝「」‹›〖〗】【»«』『〕〔》《﹐¸﹕︰﹔！¡？¿﹖﹌﹏﹋＇´ˊˋ―﹫︳︴¯＿￣﹢﹦﹤‐­˜﹟﹩﹠﹪﹡﹨﹍﹉﹎﹊ˇ︵︶︷︸︹︿﹀︺︽︾ˉ﹁﹂﹃﹄︻︼（）";

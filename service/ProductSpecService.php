@@ -42,6 +42,10 @@ class ProductSpecService
         return $this->dao->list_($product_category_ID);
     }
 
+    function all_by_category($product_category_ID){
+        return $this->dao->all_by_category($product_category_ID);
+    }
+
     function pojo($ID){
         return $this->dao->pojo($ID);
     }
