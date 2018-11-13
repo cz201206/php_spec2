@@ -19,10 +19,10 @@
         }
 
         //更新
-        function update($ID,$title,$rank){
-            $SQL = "UPDATE `product_spec_item` SET `title` = ? , rank=? WHERE `ID` = ?";
-            $params_types = "sii";
-            $params = array($title,$rank,$ID);
+        function update($ID,$title,$rank,$name){
+            $SQL = "UPDATE `product_spec_item` SET `title` = ? , rank=?,name=? WHERE `ID` = ?";
+            $params_types = "siis";
+            $params = array($title,$rank,$name,$ID);
             return $this->execute($SQL, $params_types, $params);
         }
         //首页数据

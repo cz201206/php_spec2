@@ -1,21 +1,26 @@
 <?php
 require_once dirname(__DIR__).DIRECTORY_SEPARATOR."dao".DIRECTORY_SEPARATOR."ProductCategoryDao.php";
 require_once dirname(__DIR__).DIRECTORY_SEPARATOR."pojo".DIRECTORY_SEPARATOR."ProductCategoryPojo.php";
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR."util".DIRECTORY_SEPARATOR."ChinesePinyin.class.php";
 
 class ProductCategoryService
 {
     public $dao;
+    public $ChinesePinyin;
     function __construct()
     {
         $this->dao = new ProductCategoryDao();
+        $this->ChinesePinyin = new ChinesePinyin();
     }
 
     public function addProcess($title){
-        return $this->dao->insert($title);
+        $name = $this->ChinesePinyin->TransformWithoutTonedeleteCode($title);
+        return $this->dao->insert($title,$name);
     }
 
     public function updateProcess($ID,$title){
-        return $this->dao->update($ID,$title);
+        $name = $this->ChinesePinyin->TransformWithoutTonedeleteCode($title);
+        return $this->dao->update($ID,$title,$name);
     }
 
     public function all(){

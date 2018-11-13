@@ -3,10 +3,10 @@
 
     Class ProductCategoryDao extends Dao {
         // 插入数据
-        function insert($title){
-            $SQL="INSERT INTO `product_category` (`ID`, `name`, `title`, `rank`) VALUES (NULL, NULL, ?, NULL)";
-            $params_types = "s";
-            $params = array($title);
+        function insert($title,$name){
+            $SQL="INSERT INTO `product_category` (`ID`, `name`, `title`, `rank`) VALUES (NULL, ?, ?, NULL)";
+            $params_types = "ss";
+            $params = array($name,$title);
             return $this->execute($SQL, $params_types, $params);
         }
 
@@ -19,10 +19,10 @@
         }
 
         //更新
-        function update($ID,$title){
-            $SQL = "UPDATE `product_category` SET `title` = ? WHERE `ID` = ?";
-            $params_types = "si";
-            $params = array($title,$ID);
+        function update($ID,$title,$name){
+            $SQL = "UPDATE `product_category` SET `title` = ?,name=? WHERE `ID` = ?";
+            $params_types = "ssi";
+            $params = array($title,$name,$ID);
             return $this->execute($SQL, $params_types, $params);
         }
         //首页数据

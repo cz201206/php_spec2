@@ -68,6 +68,10 @@ switch (@$_POST["action"]){
 
         break;
 
+    case "datatables":
+        $service->datatables();
+        break;
+
     //更新
     case "update":
         require_once dirname(__DIR__).DIRECTORY_SEPARATOR."view".DIRECTORY_SEPARATOR."product_spec_item".DIRECTORY_SEPARATOR."update.php";

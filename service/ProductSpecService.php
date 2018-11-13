@@ -1,6 +1,7 @@
 <?php
 require_once dirname(__DIR__).DIRECTORY_SEPARATOR."dao".DIRECTORY_SEPARATOR."ProductSpecDao.php";
 require_once dirname(__DIR__).DIRECTORY_SEPARATOR."pojo".DIRECTORY_SEPARATOR."ProductSpecInfoPojo.php";
+require_once __DIR__.DIRECTORY_SEPARATOR."ProductCategoryService.php";
 /**
  * Created by PhpStorm.
  * User: cz
@@ -10,9 +11,11 @@ require_once dirname(__DIR__).DIRECTORY_SEPARATOR."pojo".DIRECTORY_SEPARATOR."Pr
 class ProductSpecService
 {
     public $dao;
+    private $ProductCategoryService;
     function __construct()
     {
         $this->dao = new ProductSpecDao();
+        $this->ProductCategoryService = new ProductCategoryService();
     }
 
     function info(){
@@ -37,7 +40,7 @@ class ProductSpecService
     function struct($product_category_ID){
         return $this->dao->struct($product_category_ID);
     }
-
+    //仅列出个别字段
     function list_($product_category_ID){
         return $this->dao->list_($product_category_ID);
     }
@@ -52,6 +55,18 @@ class ProductSpecService
 
     function  update($title,$rank,$ID,$spec){
         return $this->dao->update($title,$rank,$ID,$spec);
+    }
+
+    function  datatables(){
+        // pojo 类型
+        $ProductCategories = $this->ProductCategoryService->all();
+        foreach ($ProductCategories as $ProductCategory){
+            $product_category_ID = $ProductCategory->ID;
+            $product = $this->all_by_category($product_category_ID);
+            echo "<pre>";
+            var_dump($product);
+        }
+
     }
 
 }

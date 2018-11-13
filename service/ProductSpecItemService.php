@@ -24,7 +24,8 @@ class ProductSpecItemService
     }
 
     public function updateProcess($ID,$title,$rank){
-        return $this->dao->update($ID,$title,$rank);
+        $name = $this->ChinesePinyin->TransformWithoutTonedeleteCode($title);
+        return $this->dao->update($ID,$title,$rank,$name);
     }
 
     public function deleteProcess($ID){
