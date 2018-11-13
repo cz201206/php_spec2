@@ -58,14 +58,23 @@ class ProductSpecService
     }
 
     function  datatables(){
+        $data = [];
         // pojo 类型
         $ProductCategories = $this->ProductCategoryService->all();
         foreach ($ProductCategories as $ProductCategory){
             $product_category_ID = $ProductCategory->ID;
-            $product = $this->all_by_category($product_category_ID);
-            echo "<pre>";
-            var_dump($product);
+            $category_name = $ProductCategory->name;
+            $products = $this->all_by_category($product_category_ID);
+            $category_index = 0;
+            foreach ($products as $product){
+                $data[$category_index][0] = $category_name;
+                $data[$category_index][1] = $product["title"];
+                $category_index++;
+            }
+
         }
+        echo "<pre>";
+        var_dump(json($data));
 
     }
 
