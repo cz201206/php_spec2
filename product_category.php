@@ -1,8 +1,8 @@
 <?php
 
-require_once __DIR__.DIRECTORY_SEPARATOR."service".DIRECTORY_SEPARATOR."ListService.php";
+require_once __DIR__.DIRECTORY_SEPARATOR."service".DIRECTORY_SEPARATOR."ProductCategoryService.php";
 
-$service = new ListService();
+$service = new ProductCategoryService();
 
 $pojos = $service->all();
 ?>

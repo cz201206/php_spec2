@@ -46,4 +46,8 @@ class ProductSpecService
         return $this->dao->pojo($ID);
     }
 
+    function  update($title,$rank,$ID,$spec){
+        return $this->dao->update($title,$rank,$ID,$spec);
+    }
+
 }

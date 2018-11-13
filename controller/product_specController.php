@@ -31,7 +31,8 @@ switch (@$_POST["action"]){
         $spec = json($_POST);
 
         $service->add($_POST["title"],$_POST["rank"],$_POST["product_category_ID"],$spec);
-
+        if($result)echo "添加成功";
+        else "添加失败";
         break;
 
     case "list":
@@ -54,7 +55,11 @@ switch (@$_POST["action"]){
         require_once dirname(__DIR__).DIRECTORY_SEPARATOR."view".DIRECTORY_SEPARATOR."product_spec_item".DIRECTORY_SEPARATOR."update.php";
         break;
     case "updateProcess":
-        $result = $service->updateProcess($_POST["ID"],$_POST["title"],$_POST["rank"]);
+        unset($_POST['action']);
+        $spec = json($_POST);
+
+        $result = $service->update($_POST["title"],$_POST["rank"],$_POST["ID"],$spec);
+
         if($result)echo "修改成功";
         else "修改失败";
         break;
