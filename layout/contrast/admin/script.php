@@ -10,6 +10,8 @@
     var canvas_Navbar = $("#canvas_Navbar");
     //canvas js 对象
     var ctx=canvas_Navbar[0].getContext("2d");
+
+    var current_index_td = 1;
 </script>
 
 <!--搜索表格-->
@@ -79,9 +81,161 @@
 <script type="text/javascript">//3.监听搜索事件
     table.on( 'select', function ( e, dt, type, indexes ) {
         var dataRow = table.rows( indexes ).data();
-        console.log(dataRow[0]);
+        var clazz = dataRow[0][0];
+        var name = dataRow[0][1];
+        var tilte = dataRow[0][2];
+        var url_data = "data/"+clazz+"/"+name+".json";
+        var url_struct = "data/struct/"+clazz+".json";
+        //var product = $("#content").load(url,{});
+        var data = {};
+        var struct = {};
+
+
+
+        $.get(url_struct, function(result){
+            struct = result;
+            createTable(struct,2);
+        });
+
+        $.get(url_data, function(result){
+            data = result;
+            fillData(struct,data);
+        });
         $("#example").css("display","none");
     })
+</script>
+
+<!--构造表格-->
+<script>
+    function createTable(struct,count_td) {
+        if($("table").size()<2){
+            //jquery 对象
+            // var table = $("<table id='t_info'></table>");
+
+            /*
+             //新增一行
+             var tr= $("<tr></tr>");
+             table.append(tr);
+
+             新增一个单元格
+             var td =  $("<td>单元格1</td>");
+             tr.append(td);
+             */
+
+            var title = $("<div>"+struct.title+"</div>");
+            $("#content").append(title);
+
+            //构造表结构
+
+            for(i_l1 in struct.l1 ){
+                //一级
+                l1 = struct.l1[i_l1];
+                //一级标题
+                var l1_title_ele = $("<div>"+l1.title+"</div>");
+                $("#content").append(l1_title_ele);
+                //一级详情
+                var table = $("<table id=table_"+i_l1+" class='spec'></table>");
+                for(i_l2 in l1.children){
+                    var l2 = l1.children[i_l2];
+                    var tds = "<td></td>";
+                    for(var i=0;i<count_td-1;i++){
+                        tds+=tds;
+                    }
+                    table.append($("<tr><td id='"+l2.name+"' class='spec_item'>"+l2.title+"</td>"+tds+"</tr>"));
+                }
+                l1_title_ele.after(table);
+            }
+        }else{
+
+        }
+
+
+    }
+    //填充数据
+    function fillData(struct,data) {
+        for(i_l1 in struct.l1 ){
+            for(i_l2 in  struct.l1[i_l1].children){
+                var l2 =  struct.l1[i_l1].children[i_l2];
+                var name = l2.name;
+                if(current_index_td===1)
+                {
+                    $("#"+name).next().html(data[name]);
+
+                }
+                else{
+                    $("#"+name).next().next().html(data[name]);
+                }
+
+            }
+        }
+        if(current_index_td===1){
+            current_index_td = 2;
+        }else{
+            current_index_td = 1;
+        }
+
+    }
+</script>
+<script type="text/javascript">//点击事件
+
+    function highLightDifferent() {
+
+        $("table.spec").each(function () {
+            $(this).find("tr").each(
+                function () {
+
+                    var tdArr = $(this).children();
+                    var td1 = tdArr.eq(1);
+                    var td2 = tdArr.eq(2);
+                    if(td1.html().trim()!=td2.html().trim()){
+                        $(this).addClass("different");
+                    }
+                }
+            );
+        });
+    }
+
+    function hideSame() {
+        $("table.spec").each(function () {
+            $(this).find("tr").each(
+                function () {
+
+                    var tdArr = $(this).children();
+                    var td1 = tdArr.eq(1);
+                    var td2 = tdArr.eq(2);
+                    if(td1.html().trim()===td2.html().trim()){
+                        $(this).addClass("cz_same");
+                    }
+                }
+            );
+        });
+    }
+    //控制高亮
+    $("#cbCheckbox1").click(function () {
+        if ($(this).prop("checked")) {//jquery 1.6以前版本 用  $(this).attr("checked")
+            highLightDifferent();
+        } else {
+            $(".different").each(
+                function () {
+                    $(this).removeClass("different");
+                }
+            );
+        }
+    });
+
+    //控制隐藏相同项
+    $("#cbCheckbox2").click(function () {
+        if ($(this).prop("checked")) {//jquery 1.6以前版本 用  $(this).attr("checked")
+            hideSame();
+        } else {
+            $(".cz_same").each(
+                function () {
+                    $(this).removeClass("cz_same");
+                }
+            );
+        }
+    });
+
 </script>
 
 

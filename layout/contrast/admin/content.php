@@ -2,6 +2,8 @@
     <div class="row">
         <div class="col-3">
 
+            <input type="checkbox" id="cbCheckbox1"/> 高亮不同项
+            <input type="checkbox" id="cbCheckbox2"/> 隐藏相同项
 
         </div>
         <div class="col-9">
