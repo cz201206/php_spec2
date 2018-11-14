@@ -49,19 +49,7 @@ switch (@$_POST["action"]){
         break;
 
     case "publish":
-        $title_category = $ChinesePinyin->TransformWithoutTonedeleteCode($_POST['title']);
-        $dir = dirname(__DIR__).DIRECTORY_SEPARATOR."data".DIRECTORY_SEPARATOR.$title_category.DIRECTORY_SEPARATOR;
-        if (!file_exists($dir)){
-            mkdir ($dir,0777,true);
-        }
-        $pojos = $service->all_by_category($_POST["product_category_ID"]);
-        foreach ($pojos as $key=>$pojo){
-            $title = $pojo["title"];
-            $name = $ChinesePinyin->TransformWithoutTonedeleteCode($title).".json";
-            $file = "$dir$name";
-            file_put_contents($file,$pojo["spec"]);
-            echo "<a href='file://$dir$name'>$title</a><br>";
-        }
+        $service->publish();
         break;
 
     case "XX":

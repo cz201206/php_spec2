@@ -16,7 +16,15 @@
                 <a class="nav-link" href="product_category.php"> 产品分类管理 </a>
 
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="product_spec.php"> 产品参数管理 </a>
 
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link" href="contrast.php"> 参数对比 </a>
+
+            </li>
 
         </ul>
 

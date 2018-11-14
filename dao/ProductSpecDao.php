@@ -3,10 +3,10 @@
 
     Class ProductSpecDao extends Dao {
         // 插入数据
-        function insert($title,$rank,$product_category_ID,$spec){
-            $SQL="INSERT INTO `product_spec` ( `title`, `rank`,`product_category_ID`,`spec`) VALUES (?, ?, ?, ?)";
-            $params_types = "siis";
-            $params = array($title,$rank,$product_category_ID,$spec);
+        function insert($name,$title,$rank,$product_category_ID,$spec){
+            $SQL="INSERT INTO `product_spec` ( `name`,`title`, `rank`,`product_category_ID`,`spec`) VALUES (?,?, ?, ?, ?)";
+            $params_types = "ssiis";
+            $params = array($name,$title,$rank,$product_category_ID,$spec);
 
             return $this->execute($SQL, $params_types, $params);
         }
@@ -20,10 +20,10 @@
         }
 
         //更新
-        function update($title,$rank,$ID,$spec){
-            $SQL = "UPDATE `product_spec` SET `title` = ? , rank=? , spec=? WHERE `ID` = ?";
-            $params_types = "sisi";
-            $params = array($title,$rank,$spec,$ID);
+        function update($name,$title,$rank,$ID,$spec){
+            $SQL = "UPDATE `product_spec` SET `name`=?,`title` = ? , rank=? , spec=? WHERE `ID` = ?";
+            $params_types = "ssisi";
+            $params = array($name,$title,$rank,$spec,$ID);
             return $this->execute($SQL, $params_types, $params);
         }
         //首页数据

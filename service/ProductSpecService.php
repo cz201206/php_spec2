@@ -1,6 +1,7 @@
 <?php
 require_once dirname(__DIR__).DIRECTORY_SEPARATOR."dao".DIRECTORY_SEPARATOR."ProductSpecDao.php";
 require_once dirname(__DIR__).DIRECTORY_SEPARATOR."pojo".DIRECTORY_SEPARATOR."ProductSpecInfoPojo.php";
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR."util".DIRECTORY_SEPARATOR."ChinesePinyin.class.php";
 require_once __DIR__.DIRECTORY_SEPARATOR."ProductCategoryService.php";
 /**
  * Created by PhpStorm.
@@ -12,10 +13,12 @@ class ProductSpecService
 {
     public $dao;
     private $ProductCategoryService;
+    public $ChinesePinyin;
     function __construct()
     {
         $this->dao = new ProductSpecDao();
         $this->ProductCategoryService = new ProductCategoryService();
+        $this->ChinesePinyin = new ChinesePinyin();
     }
 
     function info(){
@@ -34,7 +37,8 @@ class ProductSpecService
 
 
     function add($title,$rank,$product_category_ID,$spec){
-        return $this->dao->insert($title,$rank,$product_category_ID,$spec);
+        $name = $this->ChinesePinyin->TransformWithoutTonedeleteCode($title);
+        return $this->dao->insert($name,$title,$rank,$product_category_ID,$spec);
     }
 
     function struct($product_category_ID){
@@ -54,10 +58,17 @@ class ProductSpecService
     }
 
     function  update($title,$rank,$ID,$spec){
-        return $this->dao->update($title,$rank,$ID,$spec);
+        $name = $this->ChinesePinyin->TransformWithoutTonedeleteCode($title);
+        return $this->dao->update($name,$title,$rank,$ID,$spec);
     }
 
     function  datatables(){
+        $dir = dirname(__DIR__).DIRECTORY_SEPARATOR."data".DIRECTORY_SEPARATOR;
+        $name = "data_datatables.json";
+        $file = "$dir$name";
+        if (!file_exists($dir)){
+            mkdir ($dir,0777,true);
+        }
         $data = [];
         // pojo 类型
         $ProductCategories = $this->ProductCategoryService->all();
@@ -68,14 +79,32 @@ class ProductSpecService
             $category_index = 0;
             foreach ($products as $product){
                 $data[$category_index][0] = $category_name;
-                $data[$category_index][1] = $product["title"];
+                $data[$category_index][1] = $product["name"];
+                $data[$category_index][2] = $product["title"];
                 $category_index++;
             }
 
         }
-        echo "<pre>";
-        var_dump(json($data));
+        $datatables["data"] =  $data;
+        file_put_contents($file,json_encode($datatables));
+        echo $file;
 
+    }
+
+    function publish(){
+        $title_category = $this->ChinesePinyin->TransformWithoutTonedeleteCode($_POST['title']);
+        $dir = dirname(__DIR__).DIRECTORY_SEPARATOR."data".DIRECTORY_SEPARATOR.$title_category.DIRECTORY_SEPARATOR;
+        if (!file_exists($dir)){
+            mkdir ($dir,0777,true);
+        }
+        $pojos = $this->all_by_category($_POST["product_category_ID"]);
+        foreach ($pojos as $key=>$pojo){
+            $title = $pojo["title"];
+            $name = $this->ChinesePinyin->TransformWithoutTonedeleteCode($title).".json";
+            $file = "$dir$name";
+            file_put_contents($file,$pojo["spec"]);
+            echo "<a href='file://$dir$name'>$title</a><br>";
+        }
     }
 
 }
