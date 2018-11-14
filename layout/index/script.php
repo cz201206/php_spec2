@@ -21,6 +21,26 @@
 
 </script>
 
+<script type="text/javascript">//响应信息
+
+    $(".cz_datatables").click(
+        function () {
+            var url = "controller/"+$(this).data("controller");
+            var data = $(this).data("data");
+            $("#content").load(url,data);
+        }
+    );
+
+    $(".cz_struts").click(
+        function () {
+            var url = "controller/"+$(this).data("controller");
+            var data = $(this).data("data");
+            $("#content").load(url,data);
+        }
+    );
+
+</script>
+
 <script type="text/javascript">//调试信息
 
 

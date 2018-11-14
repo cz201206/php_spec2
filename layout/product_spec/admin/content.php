@@ -28,14 +28,7 @@
 
                     </li>
                 <?php }?>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
 
-                    <button class="cz_datatables btn btn-primary"
-                            data-controller="product_specController.php"
-                            data-data='{"action":"datatables"}'>
-                        更新搜索数据</button>
-
-                </li>
             </ul>
         </div>
         <div class="col-9">

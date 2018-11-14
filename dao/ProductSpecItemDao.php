@@ -33,7 +33,7 @@
 
         //level1
         function level1($product_category_ID){
-            $SQL = "SELECT `ID`, `product_category_ID`, `level`, `rank`, `title`
+            $SQL = "SELECT `ID`, `product_category_ID`, `level`, `rank`, `title`,`name`
                      FROM `product_spec_item` 
                      where product_category_ID=? and level=1
                      order by rank asc; ";
@@ -44,7 +44,7 @@
 
         //level2
         function level2($product_category_ID,$parent_ID){
-            $SQL = "SELECT `ID`, `product_category_ID`, `level`, `rank`, `title`
+            $SQL = "SELECT `ID`, `product_category_ID`, `level`, `rank`, `title`,`name`
                      FROM `product_spec_item` 
                      where product_category_ID=? and parent_ID=?
                      order by rank asc; ";

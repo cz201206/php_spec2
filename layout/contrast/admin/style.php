@@ -18,7 +18,7 @@
     */
     /*datatables样式处理*/
     .select-info{display: none;}
-    td:hover{
-        cursor: hand;
+    td{
+        cursor: pointer;
     }
 </style>

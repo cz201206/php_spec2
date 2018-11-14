@@ -52,13 +52,7 @@
     );
 
 
-    $(".cz_datatables").click(
-        function () {
-            var url = "controller/"+$(this).data("controller");
-            var data = $(this).data("data");
-            $("#content").load(url,data);
-        }
-    );
+
 
 
 </script>

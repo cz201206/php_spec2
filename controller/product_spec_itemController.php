@@ -19,6 +19,11 @@ switch (@$_POST["action"]){
         else "添加失败";
 
         break;
+
+    case "struts":
+        $service->struts();
+        break;
+
     case "select":
 
         break;
