@@ -12,6 +12,7 @@
     var ctx=canvas_Navbar[0].getContext("2d");
 
     var current_index_td = 1;
+    var current_category = "";
 </script>
 
 <!--搜索表格-->
@@ -59,6 +60,8 @@
     $(".dataTables_filter label").addClass("container zeroPadding");
     //隐藏自带搜索框
     $("label input").hide();
+    //初始化隐藏搜索框
+    $("#example").css("display","none");
 </script>
 
 <!--搜索框-->
@@ -79,6 +82,8 @@
 
 <!--点击事件-->
 <script type="text/javascript">//3.监听搜索事件
+
+    var struct = {};
     table.on( 'select', function ( e, dt, type, indexes ) {
         var dataRow = table.rows( indexes ).data();
         var clazz = dataRow[0][0];
@@ -88,14 +93,16 @@
         var url_struct = "data/struct/"+clazz+".json";
         //var product = $("#content").load(url,{});
         var data = {};
-        var struct = {};
 
 
+        if($("table").size()<2){
+            $("#content").empty();
+            $.get(url_struct, function(result){
+                struct = result;
+                createTable(struct,2);
+            });
+        }
 
-        $.get(url_struct, function(result){
-            struct = result;
-            createTable(struct,2);
-        });
 
         $.get(url_data, function(result){
             data = result;
@@ -108,51 +115,63 @@
 <!--构造表格-->
 <script>
     function createTable(struct,count_td) {
-        if($("table").size()<2){
-            //jquery 对象
-            // var table = $("<table id='t_info'></table>");
+        //jquery 对象
+        // var table = $("<table id='t_info'></table>");
 
-            /*
-             //新增一行
-             var tr= $("<tr></tr>");
-             table.append(tr);
+        /*
+         //新增一行
+         var tr= $("<tr></tr>");
+         table.append(tr);
 
-             新增一个单元格
-             var td =  $("<td>单元格1</td>");
-             tr.append(td);
-             */
-
-            var title = $("<div>"+struct.title+"</div>");
-            $("#content").append(title);
-
-            //构造表结构
-
-            for(i_l1 in struct.l1 ){
-                //一级
-                l1 = struct.l1[i_l1];
-                //一级标题
-                var l1_title_ele = $("<div>"+l1.title+"</div>");
-                $("#content").append(l1_title_ele);
-                //一级详情
-                var table = $("<table id=table_"+i_l1+" class='spec'></table>");
-                for(i_l2 in l1.children){
-                    var l2 = l1.children[i_l2];
-                    var tds = "<td></td>";
-                    for(var i=0;i<count_td-1;i++){
-                        tds+=tds;
-                    }
-                    table.append($("<tr><td id='"+l2.name+"' class='spec_item'>"+l2.title+"</td>"+tds+"</tr>"));
-                }
-                l1_title_ele.after(table);
-            }
-        }else{
-
+         新增一个单元格
+         var td =  $("<td>单元格1</td>");
+         tr.append(td);
+         */
+        var table_title = $("<table id=''></table>");
+        $("#content").append(table_title);
+        var tr= $("<tr></tr>");
+        table_title.append(tr);
+        var tds = "<td id='title'class='cz_td'>产品名称</td>";
+        for(var i=0;i<count_td;i++){
+            tds+="<td class='cz_td'> </td>";
         }
+        tr.append(tds);
+
+        var title = $("<div>"+struct.title+"</div>");
+        //$("#content").append(title);
+
+        //构造表结构
+
+        for(i_l1 in struct.l1 ){
+            //一级
+            l1 = struct.l1[i_l1];
+            //一级标题
+            var l1_title_ele = $("<div class='cz_border_left'>"+l1.title+"</div>");
+            $("#content").append(l1_title_ele);
+            //一级详情
+            var table = $("<table id=table_"+i_l1+" class='spec'></table>");
+            for(i_l2 in l1.children){
+                var l2 = l1.children[i_l2];
+                var tds = "<td class='cz_td'></td>";
+                for(var i=0;i<count_td-1;i++){
+                    tds+=tds;
+                }
+                table.append($("<tr><td id='"+l2.name+"' class='spec_item cz_td'>"+l2.title+"</td>"+tds+"</tr>"));
+            }
+            l1_title_ele.after(table);
+        }
+
 
 
     }
     //填充数据
     function fillData(struct,data) {
+        if(current_index_td===1){
+            $("#title").next().html(data["title"]);
+        }else{
+            $("#title").next().next().html(data["title"]);
+        }
+
         for(i_l1 in struct.l1 ){
             for(i_l2 in  struct.l1[i_l1].children){
                 var l2 =  struct.l1[i_l1].children[i_l2];

@@ -3,12 +3,20 @@
         padding-top: 15px;
     }
     body{height:1980px;}
+    #content{
+        padding-top: 15px;
+    }
 
-    td{border:1px solid red;width:190px;}
+    .cz_td{border:1px solid dodgerblue;width:190px;}
+    .cz_border_left{
+        border-left:1px solid dodgerblue;
+        width:190px;
+    }
     .spec_item{
         text-align: right;
         padding-right:5px;
     }
+
     .different{
         background-color: red;
         color:white;
