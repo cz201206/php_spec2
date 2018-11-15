@@ -8,4 +8,7 @@ switch (@$_POST["action"]){
     case "nav":
         echo $service->nav();
         break;
+    case "datatables":
+        $service->datatables();
+        break;
 }

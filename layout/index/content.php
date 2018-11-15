@@ -18,7 +18,7 @@
             <button type="button"
                     style="width: 48%"
                     class="cz_datatables btn btn-outline-primary float-right"
-                    data-controller="product_specController.php"
+                    data-controller="indexController.php"
                     data-data='{"action":"datatables"}'>
                 生成 搜索数据
             </button>

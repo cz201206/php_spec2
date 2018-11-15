@@ -54,4 +54,36 @@ class IndexService
         file_put_contents($file,$data_nav);
         return $file;
     }
+
+    function  datatables(){
+        $dir = dirname(__DIR__).DIRECTORY_SEPARATOR."data".DIRECTORY_SEPARATOR;
+        $name = "data_datatables.json";
+        $file = "$dir$name";
+        if (!file_exists($dir)){
+            mkdir ($dir,0777,true);
+        }
+        $data = [];
+        $category_index = 0;
+        // pojo 类型
+        $ProductCategories = $this->CategoryService->all();
+        foreach ($ProductCategories as $ProductCategory){
+            $product_category_ID = $ProductCategory->ID;
+            $category_name = $ProductCategory->name;
+            $products = $this->SpecService->all_onlyNameTitle_urlencoded_by_category($product_category_ID);
+            foreach ($products as $product){
+                $data[$category_index][0] = $category_name;
+                $data[$category_index][1] = $product["name"];
+                $data[$category_index][2] = $product["title"];
+                $category_index++;
+            }
+
+        }
+        $datatables["data"] =  $data;
+//        echo "<pre>";
+//        var_dump($datatables);
+
+        file_put_contents($file,urldecode(json_encode($datatables)));
+        echo $file;
+
+    }
 }
