@@ -21,6 +21,17 @@
 
 
 <script>
+    function TransferString(content)
+    {
+        var string = content;
+        try{
+            string=string.replace(/\r\n/g,"<br>")
+            string=string.replace(/\n/g,"<br>");
+        }catch(e) {
+            alert(e.message);
+        }
+        return string;
+    }
     //ajax上传文件
     $(function(){
         var options = {
@@ -36,6 +47,16 @@
         });
     });
     function showRequest(formData, jqForm, options) {
+        $(formData).each(
+            function () {
+                var type = $(this).attr("type");
+                if("textarea" ===type ){
+                    var value = $(this).attr("value");
+                    $(this).attr("value", TransferString(value)) ;
+                    console.log($(this));
+                }
+            }
+        );
         //显示处理界面
         $("#content").html("处理中，请稍候...");
     }

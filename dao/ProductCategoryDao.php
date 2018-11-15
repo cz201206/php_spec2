@@ -30,10 +30,17 @@
             $SQL = "SELECT * FROM `blood_glucose` order by timeID asc  LIMIT 10";
             return $this->query_toArray($SQL,null,null);
         }
+
         //全部数据
         function all(){
             $SQL = "SELECT `ID`, `name`, `title`, `rank` FROM `product_category` order by rank asc; ";
             return $this->query_toArray($SQL,null,null);
+        }
+
+        //全部数据
+        function all_onlyNameTile_urlencoded(){
+            $SQL = "SELECT  `name`, `title`,ID FROM `product_category` order by rank asc; ";
+            return $this->query_toArray_urlencode($SQL,null,null);
         }
 
         //附加信息

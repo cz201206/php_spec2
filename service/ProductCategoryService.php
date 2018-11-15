@@ -37,4 +37,19 @@ class ProductCategoryService
         return $pojos;
     }
 
+    public function all_onlyNameTile_urlencoded(){
+
+        $pojos = [];
+        $array_product_category = $this->dao->all_onlyNameTile_urlencoded();
+        foreach ($array_product_category as $product_category ){
+            $pojos[] = new ProductCategoryPojo(
+                $product_category["ID"],
+                $product_category["name"],
+                $product_category["title"],
+                null
+            );
+        }
+        return $pojos;
+    }
+
 }

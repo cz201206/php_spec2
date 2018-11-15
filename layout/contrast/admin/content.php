@@ -19,7 +19,7 @@
 
             <div class="input-group">
                 <input id="cz_input_search" type="text" class="form-control" placeholder="搜索">
-				<button id="cz_button_search" class=" btn btn-default" type="button">Go!</button>
+				<button id="cz_button_search" class=" btn btn-outline-primary " type="button">Go!</button>
             </div>
             <div class="cz_search_result " style="position:relative">
             <div class=" shadow-lg p-3 mb-5 bg-white rounded" style="position:absolute;left:1px;top:1px;width: 100%;">

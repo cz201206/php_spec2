@@ -39,6 +39,14 @@
         }
     );
 
+    $(".cz_nav").click(
+        function () {
+            var url = "controller/"+$(this).data("controller");
+            var data = $(this).data("data");
+            $("#content").load(url,data);
+        }
+    );
+
 </script>
 
 <script type="text/javascript">//调试信息
