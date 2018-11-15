@@ -61,7 +61,8 @@
     //隐藏自带搜索框
     $("label input").hide();
     //初始化隐藏搜索框
-    $("#example").css("display","none");
+//    $("#example").css("display","none");
+    $(".cz_search_result").addClass("invisible");
 </script>
 
 <!--搜索框-->
@@ -69,13 +70,15 @@
     //点击搜索按钮的搜索
     $("#cz_button_search").on("click", function() {
         table.search($("#cz_input_search").val()).draw();
-        $("#example").css("display","inline");
+//        $("#example").css("display","inline");
+        $(".cz_search_result").removeClass("invisible");
     });
     //Enter键事件
     $('#cz_input_search').keydown(function(e){
         if(e.keyCode==13){
             table.search($(this).val()).draw();
-            $("#example").css("display","inline");
+//            $("#example").css("display","inline");
+            $(".cz_search_result").removeClass("invisible");
         }
     });
 </script>
@@ -95,7 +98,7 @@
         var data = {};
 
 
-        if($("table").size()<2){
+        if($("table.spec").size()<=1){
             $("#content").empty();
             $.get(url_struct, function(result){
                 struct = result;
@@ -108,7 +111,8 @@
             data = result;
             fillData(struct,data);
         });
-        $("#example").css("display","none");
+//        $("#example").css("display","none");
+        $(".cz_search_result").addClass("invisible");
     })
 </script>
 
@@ -207,7 +211,8 @@
                     var td1 = tdArr.eq(1);
                     var td2 = tdArr.eq(2);
                     if(td1.html().trim()!=td2.html().trim()){
-                        $(this).addClass("different");
+                        //$(this).addClass("different");
+                        $(this).addClass("alert-danger");
                     }
                 }
             );
@@ -234,9 +239,10 @@
         if ($(this).prop("checked")) {//jquery 1.6以前版本 用  $(this).attr("checked")
             highLightDifferent();
         } else {
-            $(".different").each(
+            $(".alert-danger").each(
                 function () {
-                    $(this).removeClass("different");
+                    //$(this).removeClass("different");
+                    $(this).removeClass("alert-danger");
                 }
             );
         }
@@ -254,6 +260,14 @@
             );
         }
     });
+
+    //失去焦点隐藏搜索框
+
+    $("#cz_input_search").blur(function(){
+        $(".cz_search_result").addClass("invisible");
+    });
+
+
 
 </script>
 
