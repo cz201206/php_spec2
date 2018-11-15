@@ -13,14 +13,14 @@ class ProductCategoryService
         $this->ChinesePinyin = new ChinesePinyin();
     }
 
-    public function addProcess($title){
+    public function addProcess($title,$rank){
         $name = $this->ChinesePinyin->TransformWithoutTonedeleteCode($title);
-        return $this->dao->insert($title,$name);
+        return $this->dao->insert($title,$name,$rank);
     }
 
-    public function updateProcess($ID,$title){
+    public function updateProcess($ID,$title,$rank){
         $name = $this->ChinesePinyin->TransformWithoutTonedeleteCode($title);
-        return $this->dao->update($ID,$title,$name);
+        return $this->dao->update($ID,$title,$name,$rank);
     }
 
     public function all(){

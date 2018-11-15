@@ -10,7 +10,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <a
                         class="btn btn-primary"
-                        href="product_spec_item.php?action=select&ID=<?=$pojo->ID?>&product_category_ID=<?=$pojo->ID?>&title=<?=$pojo->title?>">
+                        href="product_spec_item.php?action=select&ID=<?=$pojo->ID?>&product_category_ID=<?=$pojo->ID?>&title=<?=$pojo->title?>&rank=<?=$pojo->rank?>">
                         <span id="pojo_<?=$pojo->ID?>"><?=$pojo->title?></span>
                     </a>
                     <div class="btn-group" role="group" >

@@ -3,6 +3,12 @@
         <label for="input_title">修改产品分类</label>
         <input name="title" type="text" class="form-control" id="input_title" aria-describedby="emailHelp" value="<?=$_POST['title']?>" placeholder="输入产品分类名称">
     </div>
+
+    <div class="form-group">
+        <label>排序</label>
+        <input name="rank" type="number" class="form-control" value="<?=$_POST['rank']?>" aria-describedby="emailHelp">
+    </div>
+
     <input name="action" value="updateProcess" type="hidden"/>
     <input name="ID" value="<?=$_POST['ID']?>" type="hidden"/>
     <button type="submit" class="btn btn-primary">Submit</button>

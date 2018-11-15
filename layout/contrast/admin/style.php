@@ -30,4 +30,9 @@
     td{
         cursor: pointer;
     }
+
+    /*导航栏*/
+    .card-body{
+        border-left:5px dodgerblue solid;
+    }
 </style>

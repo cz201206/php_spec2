@@ -29,6 +29,9 @@
         }
     }
 </script>
+<script>
+    drawCircle_icon();
+</script>
 
 <!--搜索表格-->
 <script>

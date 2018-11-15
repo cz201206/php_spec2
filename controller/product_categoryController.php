@@ -10,7 +10,7 @@ switch (@$_POST["action"]){
         require_once dirname(__DIR__).DIRECTORY_SEPARATOR."view".DIRECTORY_SEPARATOR."product_category".DIRECTORY_SEPARATOR."add.php";
         break;
     case "addProcess":
-        $result = $service->addProcess($_POST["title"]);
+        $result = $service->addProcess($_POST["title"],$_POST["rank"]);
         if($result)echo "添加成功";
         else "添加失败";
         break;
@@ -20,7 +20,7 @@ switch (@$_POST["action"]){
         require_once dirname(__DIR__).DIRECTORY_SEPARATOR."view".DIRECTORY_SEPARATOR."product_category".DIRECTORY_SEPARATOR."update.php";
         break;
     case "updateProcess":
-        $result = $service->updateProcess($_POST["ID"],$_POST["title"]);
+        $result = $service->updateProcess($_POST["ID"],$_POST["title"],$_POST["rank"]);
 
         if($result)echo "修改成功";
         else "修改失败";
