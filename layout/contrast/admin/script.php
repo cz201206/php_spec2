@@ -11,14 +11,29 @@
     //canvas js 对象
     var ctx=canvas_Navbar[0].getContext("2d");
 
+    var table = null;
     var current_index_td = 1;
     var current_category = "";
+</script>
+
+<!--一般性方法定义区-->
+<script>
+
+    //检测是否需要重新绘制参数表格
+    function isReDrawTable(category) {
+        if($("table.spec").size()<=1 || current_category!=category){
+            current_index_td = 1;
+            return true;
+        }else{
+            return false;
+        }
+    }
 </script>
 
 <!--搜索表格-->
 <script>
     $.ajaxSettings.async = false;
-    var table = $('#example').DataTable({
+    table = $('#example').DataTable({
         "ajax":'data/data_datatables.json' ,
         'language': {
             'emptyTable': '没有数据',
@@ -89,20 +104,20 @@
     var struct = {};
     table.on( 'select', function ( e, dt, type, indexes ) {
         var dataRow = table.rows( indexes ).data();
-        var clazz = dataRow[0][0];
+        var category = dataRow[0][0];
         var name = dataRow[0][1];
         var tilte = dataRow[0][2];
-        var url_data = "data/"+clazz+"/"+name+".json";
-        var url_struct = "data/struct/"+clazz+".json";
+        var url_data = "data/"+category+"/"+name+".json";
+        var url_struct = "data/struct/"+category+".json";
         //var product = $("#content").load(url,{});
         var data = {};
 
 
-        if($("table.spec").size()<=1){
+        if(isReDrawTable(category)){
             $("#content").empty();
             $.get(url_struct, function(result){
                 struct = result;
-                createTable(struct,2);
+                createTable(struct,2,category);
             });
         }
 
@@ -118,19 +133,8 @@
 
 <!--构造表格-->
 <script>
-    function createTable(struct,count_td) {
-        //jquery 对象
-        // var table = $("<table id='t_info'></table>");
+    function createTable(struct,count_td,category) {
 
-        /*
-         //新增一行
-         var tr= $("<tr></tr>");
-         table.append(tr);
-
-         新增一个单元格
-         var td =  $("<td>单元格1</td>");
-         tr.append(td);
-         */
         var table_title = $("<table id=''></table>");
         $("#content").append(table_title);
         var tr= $("<tr></tr>");
@@ -165,7 +169,7 @@
             l1_title_ele.after(table);
         }
 
-
+        current_category = category ;
 
     }
     //填充数据
@@ -267,8 +271,71 @@
         $(".cz_search_result").addClass("invisible");
     });
 
+</script>
+
+<!--导航栏生成区-->
+<script>
+    //$("#nav").append();
+    var url_nav = "data/nav.json";
+
+    var accordion = $("<div class='accordion' id='accordionExample1'></div>"); $("#nav").append(accordion);
+
+    $.get(url_nav, function(result){
+        for(index in result){
+
+            var category = result[index];
+            var categoryName = category.name;
+            var categoryTitle = category.title;
+            var products = category.products;
+
+            var card = $("<div class='card'></div>");accordion.append(card);
+                var card_header = $("<div class='card-header' id='heading"+categoryName+"'></div>");card.append(card_header);
+                    var h5 = $("<h5 class='mb-0'></h5>");card_header.append(h5);
+                        var button = $("<button class='btn btn-link' type='button' data-toggle='collapse' data-target='#collapse"+categoryName+"' aria-expanded='true' aria-controls='collapse"+categoryName+"'>"+categoryTitle+"</button>");h5.append(button);
+                var collapse = $("<div id='collapse"+categoryName+"' class='collapse' aria-labelledby='heading"+categoryName+"' data-parent='#accordionExample1'></div>");card.append(collapse);
+                    var card_body = $("<div class='card-body'></div>");collapse.append(card_body);
+                        var ul = $("<ul class='list-group list-group-flush'></ul>");card_body.append(ul);
 
 
+
+            for(index_product in products){
+                var product = products[index_product];
+                var productName = product.name;
+                var productTitle = product.title;
+
+                            var li = $("<li class='list-group-item'></li>");ul.append(li);
+                                var span = $("<span class='cz_nav_product' data-category='"+categoryName+"' data-name='"+productName+"'>"+productTitle+"</span>");li.append(span);
+
+                //$("#nav").append(categoryName+"/"+productName+"<p>");
+            }
+
+
+        }
+
+
+    });
+    $(".cz_nav_product").click(function () {
+
+        var category = $(this).data("category");
+        var name = $(this).data("name");
+        var url_struct = "data/struct/"+category+".json";
+        var url_data = "data/"+category+"/"+name+".json";
+
+        if(isReDrawTable(category)){
+            console.log(current_category+"::"+category);
+            $("#content").empty();
+            $.get(url_struct, function(result){
+                struct = result;
+                createTable(struct,2,category);
+            });
+        };
+
+
+        $.get(url_data, function(result){
+            data = result;
+            fillData(struct,data);
+        });
+    });
 </script>
 
 
