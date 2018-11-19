@@ -14,6 +14,8 @@
     var table = null;
     var current_index_td = 1;
     var current_category = "";
+    var src = "http://localhost/3d/mi4";
+    $(".embed-responsive-item").attr("src",src);
 </script>
 
 <!--一般性方法定义区-->
@@ -28,6 +30,16 @@
             return false;
         }
     }
+    //禁用表单元素
+    function enableInput(inputs) {
+        inputs.each().attr("disabled","");
+    }
+    //启用表单元素
+    function disableInput(inputs) {
+        inputs.each().attr("disabled","disabled");
+
+    }
+
 </script>
 <script>
     drawCircle_icon();
@@ -181,6 +193,9 @@
             $("#title").next().html(data["title"]);
         }else{
             $("#title").next().next().html(data["title"]);
+            //启用 checkbox
+           //enableInput($(":checkbox"));
+            //console.log("启用了");
         }
 
         for(i_l1 in struct.l1 ){

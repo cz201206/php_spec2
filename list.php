@@ -3,7 +3,7 @@ require_once __DIR__.DIRECTORY_SEPARATOR."service".DIRECTORY_SEPARATOR."ProductC
 
 $service = new ProductCategoryService();
 
-$pojos = $service->all();
+$pojos = $service-> all();
 ?>
 
 <?php require_once __DIR__.DIRECTORY_SEPARATOR."layout".DIRECTORY_SEPARATOR."list".DIRECTORY_SEPARATOR."framework.php"?>

@@ -7,7 +7,7 @@
         padding-top: 15px;
     }
 
-    .cz_td,.cz_table_fn td{border:1px solid dodgerblue;width:190px;}
+    .cz_td,.cz_table_fn td{border:1px solid dodgerblue;width:290px;}
     .cz_border_left{
         border-left:1px solid dodgerblue;
     }

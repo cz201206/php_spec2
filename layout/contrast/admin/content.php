@@ -30,12 +30,21 @@
 
             <table class="cz_table_fn" style="margin-top: 15px;">
                 <tr>
-                    <td>选项</td>
                     <td>
-                        <input type="checkbox" id="cbCheckbox1"/> 高亮不同项
+                        选项<p/>
+                        <input type="checkbox" id="cbCheckbox2" /> 隐藏相同项<br/>
+                        <input type="checkbox" id="cbCheckbox1" /> 高亮不同项
                     </td>
                     <td>
-                        <input type="checkbox" id="cbCheckbox2"/> 隐藏相同项
+
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="" allowfullscreen></iframe>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="" allowfullscreen width="150px"></iframe>
+                        </div>
                     </td>
                 </tr>
             </table>
