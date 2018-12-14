@@ -39,15 +39,25 @@
 
                         <div class="embed-responsive embed-responsive-16by9">
                             <iframe class="embed-responsive-item" src="" allowfullscreen></iframe>
+
+
                         </div>
                     </td>
                     <td>
                         <div class="embed-responsive embed-responsive-16by9">
                             <iframe class="embed-responsive-item" src="" allowfullscreen width="150px"></iframe>
+
                         </div>
                     </td>
                 </tr>
             </table>
+<!--            <iframe class="" src="http://localhost/3d/hs/" allowfullscreen ></iframe>-->
+
+
+
+
+
+
             <div id="content">
 
             </div>
