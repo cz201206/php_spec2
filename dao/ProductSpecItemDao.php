@@ -10,6 +10,14 @@
             return $this->execute($SQL, $params_types, $params);
         }
 
+        // 插入数据 - 批量导入
+        function insert_import($ID,$product_category_ID,$level,$parent_ID,$rank,$title,$name){
+            $SQL="INSERT INTO `product_spec_item` (`ID`,`product_category_ID`, `level`,parent_ID, `rank`, `title`, `name`) VALUES (?,?, ?, ?, ?, ?, ?)";
+            $params_types = "iiiiiss";
+            $params = array($ID,$product_category_ID,$level,$parent_ID,$rank,$title,$name);
+            return $this->execute($SQL, $params_types, $params);
+        }
+
         //删除
         function delete($ID){
             $SQL="DELETE FROM `product_spec_item` WHERE `ID` = ?";

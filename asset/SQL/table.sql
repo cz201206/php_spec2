@@ -28,3 +28,5 @@ CREATE TABLE `product_spec_item` (
  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8
 
+
+

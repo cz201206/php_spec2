@@ -47,12 +47,12 @@ function showSpectItem($worksheet)
 
     }
 }
-function pojos($worksheet){
+function pojos($worksheet,$product_category_ID){
     global $ChinesePinyin;
     $level1s = array();
     $level1 = null;
-    $level1Title = "";$level1ID = 0;
-    $level2Title = "";$level2ID = 1000;
+    $level1Title = "";$level1ID = $product_category_ID*100;
+    $level2Title = "";$level2ID = $product_category_ID*1000;
     //多行数据
     foreach ($worksheet->getRowIterator() as $row) {
 
@@ -75,7 +75,7 @@ function pojos($worksheet){
                     $level1->title = $cellValue;
                     $level1->rank = $level1ID;
                     $level1->name = $ChinesePinyin->TransformWithoutTonedeleteCode($cellValue);
-                    $level1->product_category_ID = 1;//1为手机分类
+                    $level1->product_category_ID = $product_category_ID;//1为手机分类
                     $level1->parent_ID = 0;//一级节点没有父节点
                     $level1->level = 1;//一级节点没有父节点
                     $level1->children = [];
@@ -94,7 +94,7 @@ function pojos($worksheet){
                 $level2->title = $cellValue;
                 $level2->rank = $level2ID;
                 $level2->name = $ChinesePinyin->TransformWithoutTonedeleteCode($cellValue);
-                $level2->product_category_ID = 1;//1为手机分类
+                $level2->product_category_ID = $product_category_ID;//1为手机分类
                 $level2->parent_ID = $level1ID;
                 $level2->level = 2;
                 $level2->children = null;
@@ -105,20 +105,20 @@ function pojos($worksheet){
     }
     return $level1s;
 }
-function importToDB(){
+function importToDB($product_category_ID){
     global $worksheet,$SpecItemDAO;
-    $pojos = pojos($worksheet);
+    $pojos = pojos($worksheet,$product_category_ID);
     foreach($pojos as $pojo){
-        $SpecItemDAO->insert($pojo->product_category_ID,$pojo->level,$pojo->parent_ID,$pojo->rank,$pojo->title,$pojo->name);
+        $SpecItemDAO->insert_import($pojo->ID,$pojo->product_category_ID,$pojo->level,$pojo->parent_ID,$pojo->rank,$pojo->title,$pojo->name);
         echo "<pre>";
-        echo "导入：$pojo->title<br/>";
+        echo "导入1：$pojo->title<br/>";
         foreach($pojo->children as $pojo2){
-            $SpecItemDAO->insert($pojo2->product_category_ID,$pojo2->level,$pojo2->parent_ID,$pojo2->rank,$pojo2->title,$pojo2->name);
+            $SpecItemDAO->insert_import($pojo2->ID,$pojo2->product_category_ID,$pojo2->level,$pojo2->parent_ID,$pojo2->rank,$pojo2->title,$pojo2->name);
             echo "导入：$pojo2->title<br/>";
         }
     }
 }
-importToDB();
+importToDB(1);
 //showSpectItem($worksheet);
 
 ?>
