@@ -6,15 +6,34 @@ require_once "dao".DIRECTORY_SEPARATOR."ProductSpecItemDao.php";
 
 $ChinesePinyin = new ChinesePinyin();
 $SpecItemDAO = new ProductSpecItemDao();
-
-$xlsxPath = "e:/phone.xlsx";
+$xlsxPath = "";
+if('手机'===$_GET["product_category_title"]&&'specItem'===$_GET["dataType"]){
+    $xlsxPath = "e:/phone.xlsx";
+}elseif ('手机'===$_GET["product_category_title"]&&'spec'===$_GET["dataType"]){
+    $xlsxPath = "e:/phone_data.xlsx";
+}
 $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
 $reader->setReadDataOnly(TRUE);
 $spreadsheet = $reader->load($xlsxPath);
 $worksheet = $spreadsheet->getActiveSheet();
 
-echo "<pre>";
-echo "文件位置：$xlsxPath<p>";
+//region 测试代码
+//echo "<pre>";
+foreach ($worksheet->getColumnIterator() as $column) {
+    $cellIterator = $column->getCellIterator();
+    $ColumnIndex = $column->getColumnIndex();
+    if($ColumnIndex === "L"){
+        foreach ($cellIterator as $cell) {
+            $cellValue = $cell->getValue();
+            echo "$cellValue<br>";
+        }
+        break;
+    }
+
+
+}
+//endregion
+
 
 
 function showSpectItem($worksheet)
@@ -105,7 +124,7 @@ function pojos($worksheet,$product_category_ID){
     }
     return $level1s;
 }
-function importToDB($product_category_ID){
+function importSpectItemToDB($product_category_ID){
     global $worksheet,$SpecItemDAO;
     $pojos = pojos($worksheet,$product_category_ID);
     foreach($pojos as $pojo){
@@ -118,7 +137,10 @@ function importToDB($product_category_ID){
         }
     }
 }
-importToDB(1);
+
+var_dump($_GET);
+var_dump($xlsxPath);
+//importSpectItemToDB(1);
 //showSpectItem($worksheet);
 
 ?>
