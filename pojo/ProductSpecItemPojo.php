@@ -9,6 +9,7 @@
 class ProductSpecItemPojo
 {
 
+    //数据库中字段
     public $ID;
     public $name;
     public $title;
@@ -17,6 +18,7 @@ class ProductSpecItemPojo
     public $product_category_ID;
     public $parent_ID;
 
+    //内存中构造
     public $children;
 
 }

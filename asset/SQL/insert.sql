@@ -1,0 +1,2 @@
+INSERT INTO `product_spec_item` (`ID`, `name`, `title`, `level`, `rank`, `product_category_ID`, `parent_ID`) VALUES ('11', 'a', 'a', '1', '1', '1', NULL);
+INSERT INTO `product_spec_item` (`product_category_ID`, `level`,parent_ID, `rank`, `title`, `name`) VALUES (?, ?, ?, ?, ?, ?)

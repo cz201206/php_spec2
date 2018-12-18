@@ -1,0 +1,8 @@
+{
+  "title":"手机",
+  "name":"shouji",
+  "l1":[
+    {"title":"尺寸重量","name":"zhicunzhongliang","children":[{"title":"型号","name":"xinghao"},{"title":"重量","name":"zhongliang"}]},
+    {"title":"相机","name":"xiangji","children":[{"title":"像素","name":"xiangsu"},{"title":"白平衡","name":"baipingheng"}]}
+  ]
+}
