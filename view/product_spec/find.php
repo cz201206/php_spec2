@@ -2,7 +2,7 @@
     修改参数
     <div class="form-group">
         <label >产品名称</label>
-        <input name="title"  type="text" class="form-control"></input>
+        <input name="jixing"  type="text" class="form-control"></input>
     </div>
     <?php foreach($structs as $struct){ ?>
     <div class="form-group">
@@ -12,7 +12,7 @@
     <?php }?>
     <div class="form-group">
         <label >排序</label>
-        <input name="rank"  type="number" class="form-control"></input>
+        <input name="rank"  type="number" class="form-control" value="<?=$pojo['rank']?>"></input>
     </div>
     <input name="ID" type="hidden" value='<?=$_POST["ID"]?>'/>
     <input name="product_category_ID" type="hidden" value='<?=$_POST["product_category_ID"]?>'/>
@@ -27,7 +27,7 @@
     {
         var string = content;
         try{
-            string=string.replace(/<br>/g,"\r\n")
+            string=string.replace(/<br\/>/g,"\r\n")
         }catch(e) {
             alert(e.message);
         }

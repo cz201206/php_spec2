@@ -3,11 +3,14 @@ require_once 'vendor/autoload.php';
 require_once 'pojo/ProductSpecItemPojo.php';
 require_once 'pojo/SpecPojo.php';
 require_once "util".DIRECTORY_SEPARATOR."ChinesePinyin.class.php";
+require_once "util".DIRECTORY_SEPARATOR."fn.php";
 require_once "dao".DIRECTORY_SEPARATOR."ProductSpecItemDao.php";
+require_once "dao".DIRECTORY_SEPARATOR."ProductSpecDao.php";
 
 //region 公共资源
 $ChinesePinyin = new ChinesePinyin();
 $SpecItemDAO = new ProductSpecItemDao();
+$ProductSpecDao = new ProductSpecDao();
 $xlsxPath = "";
 $product_category_ID = 0;
 
@@ -37,11 +40,11 @@ $count = 0;//列计数
 $rankPartner = 1000; //排序伴侣，逆序
 $pojos_spec = [];
 foreach ($worksheet->getColumnIterator() as $column) {
-
+    $specs = [];
     //提取列的列号
     $ColumnIndex = $column->getColumnIndex();
     //去除两个参数项列
-    if('A'=== $ColumnIndex || 'B' === $ColumnIndex)continue;
+    if('A'=== $ColumnIndex || 'B' === $ColumnIndex)continue;$count++;
     //打印提取数据列号
     echo "$ColumnIndex ";
     //机型单元格坐标
@@ -64,18 +67,26 @@ foreach ($worksheet->getColumnIterator() as $column) {
         $coordinate_spec = "B$cellRow";
         $specName = $ChinesePinyin->TransformWithoutTonedeleteCode($worksheet->getCell($coordinate_spec)->getValue());
         //将单元格内的换行替换为 <br/>
-        $pattern = array('/\s+\r\n/is',  '/\s+\n/is' );
-        $cellValue = preg_replace($pattern, '<br/>', $cellValue);
-        //最终单元格的数据库格式
-        $pojo->spec.= "$specName ：$cellValue<br/>";
-    }
+        $cellValue = str_replace(array("\r\n", "\r", "\n"), '<br/>', $cellValue);
 
+        //将 name 和 参数值 包装为关联数组，并存入 $specs 中
+        $specs["$specName"] = $cellValue;
+
+        //只提取两行数据
+        //if(2===$cellRow)break;
+    }
+    //最终单元格的数据库格式
+    $pojo->spec = json($specs);
     //数据中添加新元素
     $pojos_spec[] = $pojo;
+    
+    //导入到数据库中
+    $ProductSpecDao->insert($pojo->name,$pojo->title,$pojo->rank,$pojo->product_category_ID,$pojo->spec);
+    
     //先提取两列数据做为测试
-    if( 'D' === $ColumnIndex)break;
+    //if( 'D' === $ColumnIndex)break;
 }
-var_dump($pojos_spec);
+//var_dump($pojos_spec);
 echo "<p>总计：$count<p/>";
 //endregion
 
