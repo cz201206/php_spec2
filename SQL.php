@@ -1,37 +1,82 @@
 <?php
-require 'vendor/autoload.php';
-require 'pojo/ProductSpecItemPojo.php';
+require_once 'vendor/autoload.php';
+require_once 'pojo/ProductSpecItemPojo.php';
+require_once 'pojo/SpecPojo.php';
 require_once "util".DIRECTORY_SEPARATOR."ChinesePinyin.class.php";
 require_once "dao".DIRECTORY_SEPARATOR."ProductSpecItemDao.php";
 
+//region 公共资源
 $ChinesePinyin = new ChinesePinyin();
 $SpecItemDAO = new ProductSpecItemDao();
 $xlsxPath = "";
+$product_category_ID = 0;
+
+//确定提取文件
 if('手机'===$_GET["product_category_title"]&&'specItem'===$_GET["dataType"]){
     $xlsxPath = "e:/phone.xlsx";
 }elseif ('手机'===$_GET["product_category_title"]&&'spec'===$_GET["dataType"]){
     $xlsxPath = "e:/phone_data.xlsx";
 }
+
+//确定产品分类 ID
+switch ($_GET["product_category_title"]){
+    case "手机" : $product_category_ID = 1;break;
+}
+
 $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
 $reader->setReadDataOnly(TRUE);
 $spreadsheet = $reader->load($xlsxPath);
 $worksheet = $spreadsheet->getActiveSheet();
+//endregion
 
 //region 测试代码
-//echo "<pre>";
+echo "<pre>";
+var_dump($_GET);
+var_dump($xlsxPath);
+$count = 0;//列计数
+$rankPartner = 1000; //排序伴侣，逆序
+$pojos_spec = [];
 foreach ($worksheet->getColumnIterator() as $column) {
-    $cellIterator = $column->getCellIterator();
+
+    //提取列的列号
     $ColumnIndex = $column->getColumnIndex();
-    if($ColumnIndex === "L"){
-        foreach ($cellIterator as $cell) {
-            $cellValue = $cell->getValue();
-            echo "$cellValue<br>";
-        }
-        break;
+    //去除两个参数项列
+    if('A'=== $ColumnIndex || 'B' === $ColumnIndex)continue;
+    //打印提取数据列号
+    echo "$ColumnIndex ";
+    //机型单元格坐标
+    $coordinate_model = $ColumnIndex.'1';
+    //提取列数据
+    $pojo = new SpecPojo();
+    //$pojo->$ID;
+    $pojo->product_category_ID = $product_category_ID;
+    $pojo->rank = $rankPartner - $count;
+    $pojo->title = $worksheet->getCell($coordinate_model)->getValue();
+    $pojo->name = $ChinesePinyin->TransformWithoutTonedeleteCode($pojo->title);
+    $cellIterator = $column->getCellIterator();
+    foreach ($cellIterator as $cell) {
+        //单元格相关信息
+        $cellColumn = $cell->getColumn();
+        $cellRow = $cell->getRow();
+        $cellValue = $cell->getValue();
+
+        //将单元格值包装为对象
+        $coordinate_spec = "B$cellRow";
+        $specName = $ChinesePinyin->TransformWithoutTonedeleteCode($worksheet->getCell($coordinate_spec)->getValue());
+        //将单元格内的换行替换为 <br/>
+        $pattern = array('/\s+\r\n/is',  '/\s+\n/is' );
+        $cellValue = preg_replace($pattern, '<br/>', $cellValue);
+        //最终单元格的数据库格式
+        $pojo->spec.= "$specName ：$cellValue<br/>";
     }
 
-
+    //数据中添加新元素
+    $pojos_spec[] = $pojo;
+    //先提取两列数据做为测试
+    if( 'D' === $ColumnIndex)break;
 }
+var_dump($pojos_spec);
+echo "<p>总计：$count<p/>";
 //endregion
 
 
@@ -66,7 +111,7 @@ function showSpectItem($worksheet)
 
     }
 }
-function pojos($worksheet,$product_category_ID){
+function pojos_specItem($worksheet, $product_category_ID){
     global $ChinesePinyin;
     $level1s = array();
     $level1 = null;
@@ -126,7 +171,7 @@ function pojos($worksheet,$product_category_ID){
 }
 function importSpectItemToDB($product_category_ID){
     global $worksheet,$SpecItemDAO;
-    $pojos = pojos($worksheet,$product_category_ID);
+    $pojos = pojos_specItem($worksheet,$product_category_ID);
     foreach($pojos as $pojo){
         $SpecItemDAO->insert_import($pojo->ID,$pojo->product_category_ID,$pojo->level,$pojo->parent_ID,$pojo->rank,$pojo->title,$pojo->name);
         echo "<pre>";
@@ -138,11 +183,10 @@ function importSpectItemToDB($product_category_ID){
     }
 }
 
-var_dump($_GET);
-var_dump($xlsxPath);
+//region 执行区
 //importSpectItemToDB(1);
 //showSpectItem($worksheet);
-
+//endregion
 ?>
 
 <?php require_once __DIR__.DIRECTORY_SEPARATOR."layout".DIRECTORY_SEPARATOR."SQL".DIRECTORY_SEPARATOR."framework.php"?>

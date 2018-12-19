@@ -8,9 +8,11 @@
  */
 class SpecPojo
 {
+        public $ID;
         public $product_category_ID;
         public $spec;
         public $rank;
         public $title;
+        public $name;
 
 }
