@@ -190,9 +190,9 @@
     //填充数据
     function fillData(struct,data) {
         if(current_index_td===1){
-            $("#title").next().html(data["title"]);
+            $("#title").next().html(data["jixing"]);
         }else{
-            $("#title").next().next().html(data["title"]);
+            $("#title").next().next().html(data["jixing"]);
             //启用 checkbox
            //enableInput($(":checkbox"));
             //console.log("启用了");
