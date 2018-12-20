@@ -10,7 +10,7 @@
             <input type="checkbox" id="cbCheckbox1"/> 高亮不同项
             <input type="checkbox" id="cbCheckbox2"/> 隐藏相同项
             <div class="input-group">
-                <input id="cz_input_search" type="text" class="form-control" placeholder="搜索">
+                <input id="cz_input_search" type="text" class="" placeholder="搜索">
 				<button id="cz_button_search" class=" btn btn-default" type="button">Go!</button>
             </div>
             <table id="example" class="display" style="width:100%">

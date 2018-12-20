@@ -37,17 +37,10 @@
                     </td>
                     <td>
 
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" src="" allowfullscreen></iframe>
-
-
-                        </div>
+                        <img id="img1" height="200px" />
                     </td>
                     <td>
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" src="" allowfullscreen width="150px"></iframe>
-
-                        </div>
+                        <img id="img2" height="200px" />
                     </td>
                 </tr>
             </table>

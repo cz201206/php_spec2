@@ -104,11 +104,16 @@
         $(".cz_search_result").removeClass("invisible");
     });
     //Enter键事件
-    $('#cz_input_search').keydown(function(e){
+    $('#cz_input_search').keyup(function(e){
         if(e.keyCode==13){
             table.search($(this).val()).draw();
 //            $("#example").css("display","inline");
             $(".cz_search_result").removeClass("invisible");
+        }else if(e.keyCode==8){
+            var len = $(this).val().length;
+            console.log(len);
+            if(len<1)
+            $(".cz_search_result").addClass("invisible");
         }
     });
 </script>
@@ -118,6 +123,8 @@
 
     var struct = {};
     table.on( 'select', function ( e, dt, type, indexes ) {
+        console.log("点击了搜索结果项");
+
         var dataRow = table.rows( indexes ).data();
         var category = dataRow[0][0];
         var name = dataRow[0][1];
@@ -126,7 +133,6 @@
         var url_struct = "data/struct/"+category+".json";
         //var product = $("#content").load(url,{});
         var data = {};
-
 
         if(isReDrawTable(category)){
             $("#content").empty();
@@ -143,7 +149,7 @@
         });
 //        $("#example").css("display","none");
         $(".cz_search_result").addClass("invisible");
-    })
+    });
 </script>
 
 <!--构造表格-->
@@ -154,7 +160,7 @@
         $("#content").append(table_title);
         var tr= $("<tr></tr>");
         table_title.append(tr);
-        var tds = "<td id='title'class='cz_td'>产品名称</td>";
+        var tds = "<td id='title'class='cz_td'></td>";
         for(var i=0;i<count_td;i++){
             tds+="<td class='cz_td'> </td>";
         }
@@ -188,16 +194,22 @@
 
     }
     //填充数据
+
+
+    //填充机型 填充照片
     function fillData(struct,data) {
         if(current_index_td===1){
+            $("#img1").attr("src","data/img/shouji/hm1.png");
             $("#title").next().html(data["jixing"]);
         }else{
+            $("#img2").attr("src","data/img/shouji/hm1s.png");
             $("#title").next().next().html(data["jixing"]);
             //启用 checkbox
            //enableInput($(":checkbox"));
             //console.log("启用了");
         }
 
+        //填充参数
         for(i_l1 in struct.l1 ){
             for(i_l2 in  struct.l1[i_l1].children){
                 var l2 =  struct.l1[i_l1].children[i_l2];
@@ -213,6 +225,8 @@
 
             }
         }
+
+        //修改状态
         if(current_index_td===1){
             current_index_td = 2;
         }else{
@@ -284,10 +298,10 @@
     });
 
     //失去焦点隐藏搜索框
-
-    $("#cz_input_search").blur(function(){
-        $(".cz_search_result").addClass("invisible");
-    });
+//
+//    $("#cz_input_search").blur(function(){
+//        $(".cz_search_result").addClass("invisible");
+//    });
 
 </script>
 
@@ -322,7 +336,7 @@
                 var productTitle = product.title;
 
                             var li = $("<li class='list-group-item'></li>");ul.append(li);
-                                var span = $("<span class='cz_nav_product' data-category='"+categoryName+"' data-name='"+productName+"'>"+productTitle+"</span>");li.append(span);
+                                var span = $("<span class='cz_nav_product' data-category='"+categoryName+"' data-name='"+productName+"'><a href='#'>"+productTitle+"</a></span>");li.append(span);
 
                 //$("#nav").append(categoryName+"/"+productName+"<p>");
             }
@@ -332,6 +346,8 @@
 
 
     });
+
+    //导航栏点击
     $(".cz_nav_product").click(function () {
 
         var category = $(this).data("category");

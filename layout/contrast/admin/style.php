@@ -8,8 +8,12 @@
     }
 
     .cz_td,.cz_table_fn td{border:1px solid dodgerblue;width:290px;}
+    /*一级参数项*/
     .cz_border_left{
+        color:grey;
+        width:871px;
         border-left:1px solid dodgerblue;
+        border-bottom:5px solid dodgerblue;
     }
     .spec_item{
         text-align: right;
