@@ -138,7 +138,7 @@
             $("#content").empty();
             $.get(url_struct, function(result){
                 struct = result;
-                createTable(struct,2,category);
+                createTable(struct,1,category);
             });
         }
 
@@ -155,7 +155,8 @@
 <!--构造表格-->
 <script>
     function createTable(struct,count_td,category) {
-
+        //行 - 机型
+        /*
         var table_title = $("<table id=''></table>");
         $("#content").append(table_title);
         var tr= $("<tr></tr>");
@@ -168,14 +169,14 @@
 
         var title = $("<div>"+struct.title+"</div>");
         //$("#content").append(title);
-
+*/
         //构造表结构
 
         for(i_l1 in struct.l1 ){
             //一级
             l1 = struct.l1[i_l1];
             //一级标题
-            var l1_title_ele = $("<div class='cz_border_left'>"+l1.title+"</div>");
+            var l1_title_ele = $("<div class='cz_border_left_single'>"+l1.title+"</div>");
             $("#content").append(l1_title_ele);
             //一级详情
             var table = $("<table id=table_"+i_l1+" class='spec shadow-lg p-3 mb-5 bg-white rounded'></table>");
@@ -198,40 +199,21 @@
 
     //填充机型 填充照片
     function fillData(struct,data) {
-        if(current_index_td===1){
-            $("#img1").attr("src","data/img/shouji/hm1.png");
-            $("#title").next().html(data["jixing"]);
-        }else{
-            $("#img2").attr("src","data/img/shouji/hm1s.png");
-            $("#title").next().next().html(data["jixing"]);
-            //启用 checkbox
-           //enableInput($(":checkbox"));
-            //console.log("启用了");
-        }
+        $("#img").attr("src","data/img/shouji/hm1.png");
+//        $("#jixing").next().html(data["jixing"]);
+        $("#jixing").html(data["jixing"]);
 
         //填充参数
         for(i_l1 in struct.l1 ){
             for(i_l2 in  struct.l1[i_l1].children){
                 var l2 =  struct.l1[i_l1].children[i_l2];
                 var name = l2.name;
-                if(current_index_td===1)
-                {
-                    $("#"+name).next().html(data[name]);
-
-                }
-                else{
-                    $("#"+name).next().next().html(data[name]);
-                }
+                $("#"+name).next().html(data[name]);
 
             }
         }
 
-        //修改状态
-        if(current_index_td===1){
-            current_index_td = 2;
-        }else{
-            current_index_td = 1;
-        }
+
 
     }
 </script>
@@ -360,7 +342,7 @@
             $("#content").empty();
             $.get(url_struct, function(result){
                 struct = result;
-                createTable(struct,2,category);
+                createTable(struct,1,category);
             });
         };
 

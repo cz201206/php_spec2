@@ -1,15 +1,23 @@
 <style>
+    /*一级参数项 单个参数*/
+    .cz_border_left_single{
+        color:grey;
+        width:701px;
+        /*border-left:1px solid #007BFF;*/
+        border-bottom:5px solid #007BFF;
+    }
+
+
     .container-fluid{
         padding-top: 15px;
     }
     body{height:1980px;}
     #content{
-        padding-top: 15px;
+        margin-top: -65px;
     }
 
-    .cz_td,.cz_table_fn td{
-        border:1px solid #007BFF;;
-        width:290px;}
+    /*.cz_td,.cz_table_fn td{border:1px solid #007BFF;width:290px;}*/
+    .cz_td,.cz_table_fn td{border:1px solid #007BFF;width:350px;}
     /*一级参数项*/
     .cz_border_left{
         color:grey;
