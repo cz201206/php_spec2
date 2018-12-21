@@ -29,55 +29,69 @@
             </div>
 
 
-                <div class="container">
+                <div id="container_spec" class="container">
                     <div class="row justify-content-center">
                         <div class="col-1>
 
                         </div>
                         <div class="col-10">
-                        <div class="d-flex justify-content-center">
+                            <div class="d-flex justify-content-center">
 
-                            <figure class="figure shadow p-3 mb-5 bg-white rounded" >
-                                <img id="img" height="200px" src="data/img/shouji/hm1.png" class="figure-img img-fluid rounded">
-                                <figcaption id="jixing" class="figure-caption text-center text-white bg-primary">机型</figcaption>
-                            </figure>
-                            <div style="margin-left: 10px;">
+    <!--                            图片 机型名称-->
+                                <figure id="figure" class="figure shadow p-3 mb-5 bg-white rounded"  style="display: none">
+                                    <img id="img" height="200px"  class="figure-img img-fluid rounded">
+                                    <figcaption id="jixing" class="figure-caption text-center text-white bg-primary"></figcaption>
+                                </figure>
+    <!--                            360°视图标题 视图-->
+                                <div style="margin-left: 10px;">
+                                    <!-- Button trigger modal -->
+                                    <a  id="view_360" href="#" data-toggle="modal" data-target="#exampleModalCenter" style="display: none">
+                                        360°视图<br/>
+                                    </a><p>
+                                    <a  id="view_video" href="#" data-toggle="modal" data-target="#exampleModalCenter_video" style="display: none">
+                                        开箱视频
+                                    </a>
+<!--                                360视图 -->
+                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:530px">
+                                            <div class="modal-content" >
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalCenterTitle"></h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body" >
+                                                    <iframe width="500px" height="500px" style="border: 0px" src="http://localhost/3d/hs/"></iframe>
+                                                </div>
 
-
-
-                                <!-- Button trigger modal -->
-                                <a  href="#" data-toggle="modal" data-target="#exampleModalCenter">
-                                    360°视图
-                                </a>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:530px">
-                                        <div class="modal-content" >
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalCenterTitle"></h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
                                             </div>
-                                            <div class="modal-body" >
-                                                <iframe width="500px" height="500px" style="border: 0px" src="http://localhost/3d/hs/"></iframe>
-                                            </div>
-
                                         </div>
                                     </div>
+<!--                                开箱视频-->
+                                    <div class="modal fade" id="exampleModalCenter_video" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter_videoTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:600px">
+                                            <div class="modal-content" >
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalCenter_videoTitle"></h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body" >
+                                                    <iframe width="550px" height="500px" style="border: 0px" src="http://s1.cn/portal/Video/Detail.action?id=188"></iframe>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                 </div>
 
-                            </div>
 
-
-
-                        </div>
-
-
-
-
-
+                           </div> <!-- d-flex justify-content-center-->
+<!--                            参数详情-->
                             <div id="content" class="align-middle"></div>
                         <div class="col-1">
 
