@@ -14,7 +14,7 @@
     var table = null;
     var current_index_td = 1;
     var current_category = "";
-    var src = "http://localhost/3d/mi4";
+    var src = "http://10.237.32.11/3d/mi4";
     $(".embed-responsive-item").attr("src",src);
 </script>
 

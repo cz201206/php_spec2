@@ -62,7 +62,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body" >
-                                                    <iframe width="500px" height="500px" style="border: 0px" src="http://localhost/3d/hs/"></iframe>
+                                                    <iframe width="500px" height="500px" style="border: 0px" src="http://10.237.32.11/3d/hs/"></iframe>
                                                 </div>
 
                                             </div>
@@ -79,7 +79,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body" >
-                                                    <iframe width="550px" height="500px" style="border: 0px" src="http://s1.cn/portal/Video/Detail.action?id=188"></iframe>
+                                                    <iframe width="550px" height="500px" style="border: 0px" src="http://10.237.32.10/portal/Video/Detail.action?id=188"></iframe>
                                                 </div>
 
                                             </div>
