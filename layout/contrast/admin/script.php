@@ -145,7 +145,7 @@
 
         $.get(url_data, function(result){
             data = result;
-            fillData(struct,data);
+            fillData(name,struct,data);
         });
 //        $("#example").css("display","none");
         $(".cz_search_result").addClass("invisible");
@@ -194,15 +194,13 @@
 
     }
     //填充数据
-
-
     //填充机型 填充照片
-    function fillData(struct,data) {
+    function fillData(device_name,struct,data) {
         if(current_index_td===1){
-            $("#img1").attr("src","data/img/shouji/hm1.png");
+            $("#img1").attr("src","data/img/shouji/"+device_name+".png");
             $("#title").next().html(data["jixing"]);
         }else{
-            $("#img2").attr("src","data/img/shouji/hm1s.png");
+            $("#img2").attr("src","data/img/shouji/"+device_name+".png");
             $("#title").next().next().html(data["jixing"]);
             //启用 checkbox
            //enableInput($(":checkbox"));
@@ -367,7 +365,7 @@
 
         $.get(url_data, function(result){
             data = result;
-            fillData(struct,data);
+            fillData(name,struct,data);
         });
     });
 </script>

@@ -18,9 +18,11 @@
 
 <!--方法-->
 <script>
-    function showFigure() {
+    function showFigure(data) {
         $("#figure").show();
+        if(data.quanjiaodushitu)
         $("#view_360").show();
+        if(data.kaixiangshipin)
         $("#view_video").show();
     }
     //检测是否需要重新绘制参数表格
@@ -125,8 +127,8 @@
     }
 
     //填充机型 填充照片
-    function fillData(struct,data) {
-        $("#img").attr("src","data/img/shouji/hm1.png");
+    function fillData(device_name,struct,data) {
+        $("#img").attr("src","data/img/shouji/"+device_name+".png");
 //        $("#jixing").next().html(data["jixing"]);
         $("#jixing").html(data["jixing"]);
 
@@ -190,11 +192,12 @@
 
                     $.get(url_data, function(result){
                         data = result;
-                        fillData(struct,data);
+                        fillData(name,struct,data);
                     });
 
                     //显示图片
-                    showFigure();
+
+                    showFigure(data);
                 });
                 //$("#nav").append(categoryName+"/"+productName+"<p>");
             }
@@ -372,10 +375,11 @@
 
         $.get(url_data, function(result){
             data = result;
-            fillData(struct,data);
+            fillData(name,struct,data);
+            //显示图片
+            showFigure(data);
         });
-        //显示图片
-        showFigure();
+
 //        $("#example").css("display","none");
         $(".cz_search_result").addClass("invisible");
     });

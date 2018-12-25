@@ -36,62 +36,74 @@ $worksheet = $spreadsheet->getActiveSheet();
 echo "<pre>";
 var_dump($_GET);
 var_dump($xlsxPath);
-$count = 0;//列计数
-$rankPartner = 1000; //排序伴侣，逆序
-$pojos_spec = [];
-foreach ($worksheet->getColumnIterator() as $column) {
-    $specs = [];
-    //提取列的列号
-    $ColumnIndex = $column->getColumnIndex();
-    //去除两个参数项列
-    if('A'=== $ColumnIndex || 'B' === $ColumnIndex)continue;$count++;
-    //打印提取数据列号
-    echo "$ColumnIndex ";
-    //机型单元格坐标
-    $coordinate_model = $ColumnIndex.'1';
-    //提取列数据
-    $pojo = new SpecPojo();
-    //$pojo->$ID;
-    $pojo->product_category_ID = $product_category_ID;
-    $pojo->rank = $rankPartner - $count;
-    $pojo->title = $worksheet->getCell($coordinate_model)->getValue();
-    $pojo->name = $ChinesePinyin->TransformWithoutTonedeleteCode($pojo->title);
-    $cellIterator = $column->getCellIterator();
-    foreach ($cellIterator as $cell) {
-        //单元格相关信息
-        $cellColumn = $cell->getColumn();
-        $cellRow = $cell->getRow();
-        $cellValue = $cell->getValue();
+/**
+ * @param $worksheet
+ * @param $product_category_ID
+ * @param $ChinesePinyin
+ * @param $ProductSpecDao
+ */
 
-        //将单元格值包装为对象
-        $coordinate_spec = "B$cellRow";
-        $specName = $ChinesePinyin->TransformWithoutTonedeleteCode($worksheet->getCell($coordinate_spec)->getValue());
-        //将单元格内的换行替换为 <br/>
-        $cellValue = str_replace(array("\r\n", "\r", "\n"), '<br/>', $cellValue);
 
-        //将 name 和 参数值 包装为关联数组，并存入 $specs 中
-        $specs["$specName"] = $cellValue;
 
-        //只提取两行数据
-        //if(2===$cellRow)break;
-    }
-    //最终单元格的数据库格式
-    $pojo->spec = json($specs);
-    //数据中添加新元素
-    $pojos_spec[] = $pojo;
-    
-    //导入到数据库中
-    $ProductSpecDao->insert($pojo->name,$pojo->title,$pojo->rank,$pojo->product_category_ID,$pojo->spec);
-    
-    //先提取两列数据做为测试
-    //if( 'D' === $ColumnIndex)break;
-}
-//var_dump($pojos_spec);
-echo "<p>总计：$count<p/>";
 //endregion
 
 
+function importSpecDatas($worksheet, $product_category_ID, $ChinesePinyin, $ProductSpecDao)
+{
+    $count = 0;//列计数
+    $rankPartner = 1000; //排序伴侣，逆序
+    $pojos_spec = [];
+    foreach ($worksheet->getColumnIterator() as $column) {
+        $specs = [];
+        //提取列的列号
+        $ColumnIndex = $column->getColumnIndex();
+        //去除两个参数项列
+        if ('A' === $ColumnIndex || 'B' === $ColumnIndex) continue;
+        $count++;
+        //打印提取数据列号
+        echo "$ColumnIndex ";
+        //机型单元格坐标
+        $coordinate_model = $ColumnIndex . '1';
+        //提取列数据
+        $pojo = new SpecPojo();
+        //$pojo->$ID;
+        $pojo->product_category_ID = $product_category_ID;
+        $pojo->rank = $rankPartner - $count;
+        $pojo->title = $worksheet->getCell($coordinate_model)->getValue();
+        $pojo->name = $ChinesePinyin->TransformWithoutTonedeleteCode($pojo->title);
+        $cellIterator = $column->getCellIterator();
+        foreach ($cellIterator as $cell) {
+            //单元格相关信息
+            $cellColumn = $cell->getColumn();
+            $cellRow = $cell->getRow();
+            $cellValue = $cell->getValue();
 
+            //将单元格值包装为对象
+            $coordinate_spec = "B$cellRow";
+            $specName = $ChinesePinyin->TransformWithoutTonedeleteCode($worksheet->getCell($coordinate_spec)->getValue());
+            //将单元格内的换行替换为 <br/>
+            $cellValue = str_replace(array("\r\n", "\r", "\n"), '<br/>', $cellValue);
+
+            //将 name 和 参数值 包装为关联数组，并存入 $specs 中
+            $specs["$specName"] = $cellValue;
+
+            //只提取两行数据
+            //if(2===$cellRow)break;
+        }
+        //最终单元格的数据库格式
+        $pojo->spec = json($specs);
+        //数据中添加新元素
+        $pojos_spec[] = $pojo;
+
+        //导入到数据库中
+        $ProductSpecDao->insert($pojo->name, $pojo->title, $pojo->rank, $pojo->product_category_ID, $pojo->spec);
+
+        //先提取两列数据做为测试
+        //if( 'D' === $ColumnIndex)break;
+    }
+//var_dump($pojos_spec);
+    echo "<p>总计：$count<p/>";
+}
 function showSpectItem($worksheet)
 {
     $level1Title = "";$level1ID = 0;
@@ -195,7 +207,8 @@ function importSpectItemToDB($product_category_ID){
 }
 
 //region 执行区
-//importSpectItemToDB(1);
+importSpectItemToDB(1);
+//importSpecDatas($worksheet, $product_category_ID, $ChinesePinyin, $ProductSpecDao);
 //showSpectItem($worksheet);
 //endregion
 ?>

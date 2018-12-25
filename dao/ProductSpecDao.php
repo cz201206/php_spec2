@@ -95,7 +95,7 @@
         }
 
         function all_onlyNameTitle_urlencoded_by_category($product_category_ID){
-            $SQL = "SELECT name,title  FROM product_spec WHERE product_category_ID=? order by rank desc;";
+            $SQL = "SELECT name,title  FROM product_spec WHERE product_category_ID=? order by rank ;";//desc
             $params_types = "i";
             $params = array($product_category_ID);
             return $this->query_toArray_urlencode($SQL,$params_types,$params);
