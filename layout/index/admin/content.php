@@ -1,13 +1,14 @@
 <div class="container-fluid">
     <div class="row ">
         <div class="col-3">
-
+            <span class="oi oi-flag" style="font-size: 0.8rem;">导航</span>
+            <a href="contrast.html" class="oi oi-contrast float-right" style="font-size: 0.8rem;top:10px;">参数对比</a>
             <div id="nav"></div>
 
 
         </div>
         <div class="col-9">
-
+            <span class="oi oi-magnifying-glass" style="font-size: 0.8rem;">搜索</span>
             <div class="input-group">
                 <input id="cz_input_search" type="text" class="form-control" placeholder="搜索">
                 <button id="cz_button_search" class=" btn btn-outline-primary " type="button">Go!</button>
