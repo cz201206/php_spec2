@@ -52,9 +52,15 @@ class ProductSpecService
     function all_by_category($product_category_ID){
         return $this->dao->all_by_category($product_category_ID);
     }
+
     function all_onlyNameTitle_urlencoded_by_category($product_category_ID){
         return $this->dao->all_onlyNameTitle_urlencoded_by_category($product_category_ID);
     }
+
+    function all_onlyNameTitle_urlencoded_by_category_like($product_category_ID,$like){
+        return $this->dao->all_onlyNameTitle_urlencoded_by_category_like($product_category_ID,$like);
+    }
+
     function pojo($ID){
         return $this->dao->pojo($ID);
     }

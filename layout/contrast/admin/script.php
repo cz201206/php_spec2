@@ -319,10 +319,10 @@
             var products = category.products;
 
             var card = $("<div class='card'></div>");accordion.append(card);
-                var card_header = $("<div class='card-header' id='heading"+categoryName+"'></div>");card.append(card_header);
+                var card_header = $("<div class='card-header' id='heading"+categoryName+index+"'></div>");card.append(card_header);
                     var h5 = $("<h5 class='mb-0'></h5>");card_header.append(h5);
-                        var button = $("<button class='btn btn-link' type='button' data-toggle='collapse' data-target='#collapse"+categoryName+"' aria-expanded='true' aria-controls='collapse"+categoryName+"'>"+categoryTitle+"</button>");h5.append(button);
-                var collapse = $("<div id='collapse"+categoryName+"' class='collapse' aria-labelledby='heading"+categoryName+"' data-parent='#accordionExample1'></div>");card.append(collapse);
+                        var button = $("<button class='btn btn-link' type='button' data-toggle='collapse' data-target='#collapse"+categoryName+index+"' aria-expanded='true' aria-controls='collapse"+categoryName+index+"'>"+categoryTitle+"</button>");h5.append(button);
+                var collapse = $("<div id='collapse"+categoryName+index+"' class='collapse' aria-labelledby='heading"+categoryName+index+"' data-parent='#accordionExample1'></div>");card.append(collapse);
                     var card_body = $("<div class='card-body'></div>");collapse.append(card_body);
                         var ul = $("<ul class='list-group list-group-flush'></ul>");card_body.append(ul);
 
@@ -336,7 +336,7 @@
                             var li = $("<li class='list-group-item'></li>");ul.append(li);
                                 var span = $("<span class='cz_nav_product' data-category='"+categoryName+"' data-name='"+productName+"'><a href='#'>"+productTitle+"</a></span>");li.append(span);
 
-                //$("#nav").append(categoryName+"/"+productName+"<p>");
+                //$("#nav").append(categoryName+index+"/"+productName+"<p>");
             }
 
 

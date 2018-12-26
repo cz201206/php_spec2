@@ -35,11 +35,33 @@ class IndexService
             $category_ID = $category->ID;
             $category_name = $category->name;
             $category_title = $category->title;
-            $products = $this->SpecService->all_onlyNameTitle_urlencoded_by_category($category_ID);
-            //装箱
-            $nav[$key]["name"] = $category_name;
-            $nav[$key]["title"] = $category_title;
-            $nav[$key]["products"] = $products;
+            $products = null;
+            if(1!=$category_ID){
+                $products = $this->SpecService->all_onlyNameTitle_urlencoded_by_category($category_ID);
+                //装箱
+                $nav[$key]["name"] = $category_name;
+                $nav[$key]["title"] = $category_title;
+                $nav[$key]["products"] = $products;
+            }
+            else{
+                $products = $this->SpecService->all_onlyNameTitle_urlencoded_by_category_like($category_ID,'MI %');
+                //装箱
+                $nav[100]["name"] = $category_name;
+                $nav[100]["title"] = '小米手机';
+                $nav[100]["products"] = $products;
+                $products = $this->SpecService->all_onlyNameTitle_urlencoded_by_category_like($category_ID,'RedMI %');
+                //装箱
+                $nav[101]["name"] = $category_name;
+                $nav[101]["title"] = '红米手机';
+                $nav[101]["products"] = $products;
+                $products = $this->SpecService->all_onlyNameTitle_urlencoded_by_category_like($category_ID,'MIPad %');
+                //装箱
+                $nav[102]["name"] = $category_name;
+                $nav[102]["title"] = "小米平板";
+                $nav[102]["products"] = $products;
+
+            }
+
         }
         $data_nav = urldecode(json_encode($nav));
 
