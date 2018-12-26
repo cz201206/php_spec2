@@ -13,7 +13,7 @@
                 <button id="cz_button_search" class=" btn btn-outline-primary " type="button">Go!</button>
             </div>
             <div class="cz_search_result " style="position:relative">
-                <div class=" shadow-lg p-3 mb-5 bg-white rounded" style="position:absolute;left:1px;top:1px;width: 100%;">
+                <div class=" shadow-lg p-3 mb-5 bg-white rounded" style="position:absolute;left:1px;top:1px;width: 100%;z-index: 999">
 
                     <table id="example" class="display " style="width: 100%;" >
                         <thead>

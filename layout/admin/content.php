@@ -22,6 +22,13 @@
                     data-data='{"action":"datatables"}'>
                 生成 搜索数据
             </button>
+            <button type="button"
+                    style="margin-top: 15px;"
+                    class="cz_struts btn btn-outline-primary btn-block"
+                    data-controller="indexController.php"
+                    data-data='{"action":"3dNames"}'>
+                生成 存在360°视图机型 name
+            </button>
         </div>
         <div class="col-6">
             <div id="content"></div>

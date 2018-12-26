@@ -108,4 +108,20 @@ class IndexService
         echo $file;
 
     }
+
+    function f3dName(){
+        $dir_str = "D:/php/Apache24/htdocs/project/specs/data/3d";
+        $dir = dir($dir_str);
+        $dirs = [];
+        while ($file = $dir->read()){
+            $currentDir = iconv("GBK","utf-8",$file);
+            $dirs[$currentDir] = $currentDir;
+        }
+        /*
+        unset($dirs[0]);
+        unset($dirs[1]);
+        */
+        echo "<pre>";
+       echo json($dirs);
+    }
 }

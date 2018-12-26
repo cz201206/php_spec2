@@ -207,10 +207,16 @@ function importSpectItemToDB($product_category_ID){
 }
 
 //region 执行区
-importSpectItemToDB(1);
+//importSpectItemToDB(1);
 //importSpecDatas($worksheet, $product_category_ID, $ChinesePinyin, $ProductSpecDao);
 //showSpectItem($worksheet);
 //endregion
+
+if('手机'===$_GET["product_category_title"]&&'specItem'===$_GET["dataType"]){
+    importSpectItemToDB(1);
+}elseif ('手机'===$_GET["product_category_title"]&&'spec'===$_GET["dataType"]){
+    importSpecDatas($worksheet, $product_category_ID, $ChinesePinyin, $ProductSpecDao);
+}
 ?>
 
 <?php require_once __DIR__.DIRECTORY_SEPARATOR."layout".DIRECTORY_SEPARATOR."SQL".DIRECTORY_SEPARATOR."framework.php"?>

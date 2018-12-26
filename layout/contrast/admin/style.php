@@ -1,4 +1,6 @@
 <style>
+
+    .spec tr:nth-child(1){ border-top:5px solid #007BFF;}
     .container-fluid{
         padding-top: 15px;
     }
@@ -13,9 +15,11 @@
     /*一级参数项*/
     .cz_border_left{
         color:grey;
+        /*
         width:871px;
-        /*border-left:1px solid #007BFF;*/
+        border-left:1px solid #007BFF;
         border-bottom:5px solid #007BFF;
+        */
     }
     .spec_item{
         text-align: right;

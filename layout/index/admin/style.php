@@ -1,10 +1,13 @@
 <style>
+
+    .spec tr:nth-child(1){ border-top:5px solid #007BFF;}
     /*一级参数项 单个参数*/
     .cz_border_left_single{
         color:grey;
+        /*
         width:701px;
-        /*border-left:1px solid #007BFF;*/
         border-bottom:5px solid #007BFF;
+        */
     }
 
 

@@ -11,4 +11,8 @@ switch (@$_POST["action"]){
     case "datatables":
         $service->datatables();
         break;
+    case "3dNames":
+        echo "响应3dNames";
+        $service->f3dName();
+        break;
 }
