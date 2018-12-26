@@ -50,3 +50,17 @@
         border-left:5px #007BFF solid;
     }
 </style>
+
+<style>
+    .wrap1 {
+        clear: left;
+        float: left;
+        position: relative;
+        left: 50%;
+    }
+    .content1 {
+        float: left;
+        position: relative;
+        right: 50%;
+    }
+</style>

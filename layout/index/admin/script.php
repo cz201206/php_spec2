@@ -14,16 +14,33 @@
     var table = null;
     var current_index_td = 1;
     var current_category = "";
+    var jixing = "";
 </script>
 
 <!--方法-->
 <script>
     function showFigure(data) {
-        $("#figure").show();
-        if(data.quanjiaodushitu)
-        $("#view_360").show();
+
+        $("#figure").hide();
+        if(data.quanjiaodushitu) {
+            $("#view_360_iframe").attr("src","data/3d/"+jixing);//src="http://10.237.32.11/3d/hs/"
+            $("#view_360").show();
+        }else{
+            $("#view_360").hide();
+        }
         if(data.kaixiangshipin)
         $("#view_video").show();
+        else{
+            $("#view_video").hide();
+        }
+        if(data.chanpinmaidian){
+
+            $("#sellingPoint").html(data.chanpinmaidian);
+            $("#sellingPoint").show();
+        }else {
+            $("#sellingPoint").hide();
+        }
+        $("#figure").show();
     }
     //检测是否需要重新绘制参数表格
     function isReDrawTable(category) {
@@ -192,6 +209,7 @@
 
                     $.get(url_data, function(result){
                         data = result;
+                        jixing = name;
                         fillData(name,struct,data);
                     });
 
@@ -376,6 +394,7 @@
         $.get(url_data, function(result){
             data = result;
             fillData(name,struct,data);
+            jixing = name;
             //显示图片
             showFigure(data);
         });

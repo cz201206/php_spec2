@@ -21,11 +21,11 @@
 
             </li>
 
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="index.php"> 参数 </a>
             </li>
 
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="contrast.php"> 参数对比 </a>
             </li>
 

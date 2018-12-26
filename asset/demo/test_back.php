@@ -8,5 +8,13 @@ $db_datas = $ProductSpecDao->all_by_category(1);
 
 ?>
 
-<?php require_once __DIR__.DIRECTORY_SEPARATOR."layout".DIRECTORY_SEPARATOR."test".DIRECTORY_SEPARATOR."framework.php"?>
+<table>
+    <?php foreach($db_datas as $data){ ?>
 
+        <tr>
+            <td><?=$data["title"]?></td>
+            <td><?=$data["name"]?></td>
+        </tr>
+
+    <?php }?>
+</table>
