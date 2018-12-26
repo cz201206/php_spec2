@@ -32,8 +32,8 @@
                 <tr>
                     <td>
                         选项<p/>
-                        <input type="checkbox" id="cbCheckbox1" /> 高亮不同项<br/>
-                        <input type="checkbox" id="cbCheckbox2" /> 隐藏相同项
+                        <input type="checkbox" id="cbCheckbox1" disabled/> 高亮不同项<br/>
+                        <input type="checkbox" id="cbCheckbox2" disabled/> 隐藏相同项
                     </td>
                     <td>
 

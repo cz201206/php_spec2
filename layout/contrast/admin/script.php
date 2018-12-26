@@ -15,6 +15,7 @@
     var current_index_td = 1;
     var current_category = "";
     var src = "http://10.237.32.11/3d/mi4";
+    var jixing_count = 0;
     $(".embed-responsive-item").attr("src",src);
 </script>
 
@@ -38,6 +39,76 @@
     function disableInput(inputs) {
         inputs.each().attr("disabled","disabled");
 
+    }
+
+    function highLightDifferent() {
+
+        $("table.spec").each(function () {
+            $(this).find("tr").each(
+                function () {
+
+                    var tdArr = $(this).children();
+                    var td1 = tdArr.eq(1);
+                    var td2 = tdArr.eq(2);
+                    if(td1.html().trim()!=td2.html().trim()){
+                        //$(this).addClass("different");
+                        $(this).addClass("alert-danger");
+                    }
+                }
+            );
+        });
+    }
+
+    function hideSame() {
+        $("table.spec").each(function () {
+            $(this).find("tr").each(
+                function () {
+
+                    var tdArr = $(this).children();
+                    var td1 = tdArr.eq(1);
+                    var td2 = tdArr.eq(2);
+                    if(td1.html().trim()===td2.html().trim()){
+                        $(this).addClass("cz_same");
+                    }
+                }
+            );
+        });
+    }
+
+    function checkAction_highLight() {
+        $(".alert-danger").each(
+            function () {
+                //$(this).removeClass("different");
+                $(this).removeClass("alert-danger");
+            }
+        );
+        if ( $("#cbCheckbox1").prop("checked")) {//jquery 1.6以前版本 用  $(this).attr("checked")
+            highLightDifferent();
+        } else {
+            $(".alert-danger").each(
+                function () {
+                    //$(this).removeClass("different");
+                    $(this).removeClass("alert-danger");
+                }
+            );
+        }
+    }
+
+    function checkAction_hideSame() {
+        $(".cz_same").each(
+            function () {
+                $(this).removeClass("cz_same");
+            }
+        );
+        if ($("#cbCheckbox2").prop("checked")) {//jquery 1.6以前版本 用  $(this).attr("checked")
+            hideSame();
+        } else {
+            $(".cz_same").each(
+                function () {
+                    $(this).removeClass("cz_same");
+                }
+            );
+        }
     }
 
 </script>
@@ -229,71 +300,27 @@
             current_index_td = 2;
         }else{
             current_index_td = 1;
-        }
 
+
+        }
+        jixing_count++;
+        if(jixing_count>1){
+            $("input[type=checkbox]").each(function(){
+                $(this).attr("disabled",false);
+            });
+        }
+        checkAction_highLight();
+        checkAction_hideSame();
     }
 </script>
 <script type="text/javascript">//点击事件
 
-    function highLightDifferent() {
 
-        $("table.spec").each(function () {
-            $(this).find("tr").each(
-                function () {
-
-                    var tdArr = $(this).children();
-                    var td1 = tdArr.eq(1);
-                    var td2 = tdArr.eq(2);
-                    if(td1.html().trim()!=td2.html().trim()){
-                        //$(this).addClass("different");
-                        $(this).addClass("alert-danger");
-                    }
-                }
-            );
-        });
-    }
-
-    function hideSame() {
-        $("table.spec").each(function () {
-            $(this).find("tr").each(
-                function () {
-
-                    var tdArr = $(this).children();
-                    var td1 = tdArr.eq(1);
-                    var td2 = tdArr.eq(2);
-                    if(td1.html().trim()===td2.html().trim()){
-                        $(this).addClass("cz_same");
-                    }
-                }
-            );
-        });
-    }
     //控制高亮
-    $("#cbCheckbox1").click(function () {
-        if ($(this).prop("checked")) {//jquery 1.6以前版本 用  $(this).attr("checked")
-            highLightDifferent();
-        } else {
-            $(".alert-danger").each(
-                function () {
-                    //$(this).removeClass("different");
-                    $(this).removeClass("alert-danger");
-                }
-            );
-        }
-    });
+    $("#cbCheckbox1").click(checkAction_highLight);
 
     //控制隐藏相同项
-    $("#cbCheckbox2").click(function () {
-        if ($(this).prop("checked")) {//jquery 1.6以前版本 用  $(this).attr("checked")
-            hideSame();
-        } else {
-            $(".cz_same").each(
-                function () {
-                    $(this).removeClass("cz_same");
-                }
-            );
-        }
-    });
+    $("#cbCheckbox2").click(checkAction_hideSame);
 
     //失去焦点隐藏搜索框
 //
