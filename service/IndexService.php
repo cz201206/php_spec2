@@ -54,11 +54,18 @@ class IndexService
                 $nav[101]["name"] = $category_name;
                 $nav[101]["title"] = '红米手机';
                 $nav[101]["products"] = $products;
+
                 $products = $this->SpecService->all_onlyNameTitle_urlencoded_by_category_like($category_ID,'MIPad %');
                 //装箱
                 $nav[102]["name"] = $category_name;
                 $nav[102]["title"] = "小米平板";
                 $nav[102]["products"] = $products;
+
+                $products = $this->SpecService->all_onlyNameTitle_urlencoded_by_category_like($category_ID,'黑鲨%');
+                //装箱
+                $nav[103]["name"] = $category_name;
+                $nav[103]["title"] = "第三方手机";
+                $nav[103]["products"] = $products;
 
             }
 

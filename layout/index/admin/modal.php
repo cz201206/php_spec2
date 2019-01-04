@@ -36,7 +36,7 @@
                     </button>
                 </div>
                 <div class="modal-body" >
-                    <iframe width="550px" height="500px" style="border: 0px" src="http://10.237.32.10/portal/Video/Detail.action?id=188"></iframe>
+                    <iframe id="view_video_iframe" width="550px" height="500px" style="border: 0px" src="http://10.237.32.10/portal/Video/Detail.action?id=188"></iframe>
                 </div>
             </div>
         </div>

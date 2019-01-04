@@ -6,16 +6,19 @@
 <script src="/public/project/specs/js/fn.js"></script>
 <!--变量-->
 <script type="text/javascript">//对象获取，变量声明定义
+    /*
     //canvas jquery 对象
     var canvas_Navbar = $("#canvas_Navbar");
     //canvas js 对象
     var ctx=canvas_Navbar[0].getContext("2d");
-
+*/
     var table = null;
     var current_index_td = 1;
     var current_category = "";
     var jixing = "";
     var var3dNames = {"MI6X":"MI6X","MI8":"MI8","MI8pingmuzhiwenban":"MI8pingmuzhiwenban","MI8qingchunban":"MI8qingchunban","MI8SE":"MI8SE","MI8toumingtansuoban":"MI8toumingtansuoban","MIMAX3":"MIMAX3","MIMIX2S":"MIMIX2S","MIMIX3":"MIMIX3","MIPad4WIFI":"MIPad4WIFI","RedMI5":"RedMI5","RedMI6":"RedMI6","RedMI6Pro":"RedMI6Pro","RedMINote5":"RedMINote5","RedMIS2":"RedMIS2","\u5c0f\u7c73\u7c73\u5bb6\u7a7a\u6c14\u68c0\u6d4b\u4eea":"小米米家空气检测仪","\u9ed1\u9ca8\u6e38\u620f\u624b\u673a":"黑鲨游戏手机"};
+    var url_video = "http://10.237.32.10/portal/Video/Detail.action?id=";
+    var video = {"heishayouxishouji":"172","heishayouxishoujiHelo":"191"};
 </script>
 
 <!--方法-->
@@ -23,17 +26,23 @@
     function showFigure(data) {
 
         $("#figure").hide();
+        //360度检测
         if(jixing in var3dNames) {
             $("#view_360_iframe").attr("src","data/3d/"+jixing);//src="http://10.237.32.11/3d/hs/"
             $("#view_360").show();
         }else{
             $("#view_360").hide();
         }
-        if(data.kaixiangshipin)
-        $("#view_video").show();
+        //开箱视频检测
+        if(jixing in video){
+            $("#view_video_iframe").attr("src",url_video+""+video[jixing]);
+            $("#view_video").show();
+        }
         else{
             $("#view_video").hide();
         }
+
+        //产品卖点检测
         if(data.chanpinmaidian){
 
             $("#sellingPoint").html(data.chanpinmaidian);
@@ -41,6 +50,8 @@
         }else {
             $("#sellingPoint").hide();
         }
+
+        //图片，机型显示
         $("#figure").show();
     }
     //检测是否需要重新绘制参数表格
@@ -276,7 +287,7 @@
     $(".cz_search_result").addClass("invisible");
 </script>
 <script>
-    drawCircle_icon();
+    //drawCircle_icon();
 </script>
 
 <!--监听-->
