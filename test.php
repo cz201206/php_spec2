@@ -1,7 +1,7 @@
 <?php
 require 'vendor/autoload.php';
 
-$xlsxPath = "E:/电视盒子全机型参数表汇总.xlsx";
+$xlsxPath = __DIR__.DIRECTORY_SEPARATOR."data".DIRECTORY_SEPARATOR."xlsx".DIRECTORY_SEPARATOR."电视盒子全机型参数表汇总.xlsx";
 $xlsxPath = iconv("UTF-8", "GBK//IGNORE",$xlsxPath);
 $sheetIndex = 0 ;
 
@@ -29,6 +29,6 @@ foreach ($worksheet->getRowIterator() as $row) {
 echo '</table>' . PHP_EOL;
 
 ?>
-
+a
 <?php require_once __DIR__.DIRECTORY_SEPARATOR."layout".DIRECTORY_SEPARATOR."test".DIRECTORY_SEPARATOR."framework.php"?>
 

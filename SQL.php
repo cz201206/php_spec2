@@ -15,7 +15,7 @@ $dataType = $_GET["dataType"];//导入参数 or 参数项依据
 $ChinesePinyin = new ChinesePinyin();
 $SpecItemDAO = new ProductSpecItemDao();
 $ProductSpecDao = new ProductSpecDao();
-$xlsxPath = "";
+$xlsxPath = __DIR__.DIRECTORY_SEPARATOR."data".DIRECTORY_SEPARATOR."xlsx".DIRECTORY_SEPARATOR;
 $product_category_ID = 0;
 $sheetIndex = 0 ;
 
@@ -46,22 +46,29 @@ function importSpecDatas($worksheet, $product_category_ID, $ChinesePinyin, $Prod
         $pojo->name = $ChinesePinyin->TransformWithoutTonedeleteCode($pojo->title);
         $cellIterator = $column->getCellIterator();
         foreach ($cellIterator as $cell) {
-            //单元格相关信息
-            $cellColumn = $cell->getColumn();
-            $cellRow = $cell->getRow();
             $cellValue = $cell->getValue();
+            if('产品图'!=$cellValue){
+                //单元格相关信息
+                $cellColumn = $cell->getColumn();
+                $cellRow = $cell->getRow();
 
-            //将单元格值包装为对象
-            $coordinate_spec = "B$cellRow";
-            $specName = $ChinesePinyin->TransformWithoutTonedeleteCode($worksheet->getCell($coordinate_spec)->getValue());
-            //将单元格内的换行替换为 <br/>
-            $cellValue = str_replace(array("\r\n", "\r", "\n"), '<br/>', $cellValue);
+                //将单元格值包装为对象
+                $coordinate_spec = "B$cellRow";
+                $specTitle = $worksheet->getCell($coordinate_spec)->getValue();
+                $specName = $ChinesePinyin->TransformWithoutTonedeleteCode($specTitle);
+                //特殊处理
+                if('详细参数'==$specTitle)$specName = $ChinesePinyin->TransformWithoutTonedeleteCode('机型');
+                //将单元格内的换行替换为 <br/>
+                $cellValue = str_replace(array("\r\n", "\r", "\n"), '<br/>', $cellValue);
 
-            //将 name 和 参数值 包装为关联数组，并存入 $specs 中
-            $specs["$specName"] = $cellValue;
+                //将 name 和 参数值 包装为关联数组，并存入 $specs 中
+                $specs["$specName"] = $cellValue;
 
-            //只提取两行数据
-            //if(2===$cellRow)break;
+                //只提取两行数据
+                //if(2===$cellRow)break;
+            }else{
+
+            }
         }
         //最终单元格的数据库格式
         $pojo->spec = json($specs);
@@ -128,7 +135,7 @@ function pojos_specItem($worksheet, $product_category_ID){
             // A 列处理区
             if ('A' === $cellColumn) {
                 //新一级出现时处理区
-                if (NULL !== $cellValue) {
+                if (NULL !== $cellValue&&'参数项'!=$cellValue) {
                     $level1Title = $cellValue;$level1ID++;
                     $level1 = new ProductSpecItemPojo();
 
@@ -148,18 +155,25 @@ function pojos_specItem($worksheet, $product_category_ID){
                 }
                 // B 列处理区
             } elseif ('B' === $cellColumn) {
-                $level2Title = $cellValue;$level2ID++;
-                $level2 = new ProductSpecItemPojo();
+                //除去多余项
+                if('产品图'!=$cellValue&&'产品卖点'!=$cellValue){
+                    $level2Title = $cellValue;
+                    $level2ID++;
+                    $level2 = new ProductSpecItemPojo();
 
-                $level2->ID = $level2ID;
-                $level2->title = $cellValue;
-                $level2->rank = $level2ID;
-                $level2->name = $ChinesePinyin->TransformWithoutTonedeleteCode($cellValue);
-                $level2->product_category_ID = $product_category_ID;//1为手机分类
-                $level2->parent_ID = $level1ID;
-                $level2->level = 2;
-                $level2->children = null;
-                $level1->children[] = $level2;
+                    $level2->ID = $level2ID;
+                    $level2->title = $cellValue;
+                    $level2->rank = $level2ID;
+                    $level2->name = $ChinesePinyin->TransformWithoutTonedeleteCode($cellValue);
+                    $level2->product_category_ID = $product_category_ID;//1为手机分类
+                    $level2->parent_ID = $level1ID;
+                    $level2->level = 2;
+                    $level2->children = null;
+                    $level1->children[] = $level2;
+                }else{
+
+                }
+
             }
         }
 
@@ -193,13 +207,13 @@ switch ($product_category_title){
         break;
     case "电视":
         $product_category_ID = 2;//产品类别 ID
-        $xlsxPath = "E:/电视盒子全机型参数表汇总.xlsx";
+        $xlsxPath .= "电视盒子全机型参数表汇总.xlsx";
         $xlsxPath = iconv("UTF-8", "GBK//IGNORE",$xlsxPath);
         $sheetIndex = 0;
         break;
     case "盒子":
         $product_category_ID = 3;//产品类别 ID
-        $xlsxPath = "E:/电视盒子全机型参数表汇总.xlsx";
+        $xlsxPath .= "电视盒子全机型参数表汇总.xlsx";
         $xlsxPath = iconv("UTF-8", "GBK//IGNORE",$xlsxPath);
         $sheetIndex = 1;
         break;

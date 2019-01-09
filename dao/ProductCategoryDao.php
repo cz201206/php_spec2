@@ -39,7 +39,7 @@
 
         //全部数据
         function all_onlyNameTile_urlencoded(){
-            $SQL = "SELECT  `name`, `title`,ID FROM `product_category` order by rank asc; ";
+            $SQL = "SELECT  `name`, `title`,ID FROM `product_category` order by rank asc; ";//
             return $this->query_toArray_urlencode($SQL,null,null);
         }
 

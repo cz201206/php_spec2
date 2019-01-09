@@ -39,9 +39,9 @@ class IndexService
             if(1!=$category_ID){
                 $products = $this->SpecService->all_onlyNameTitle_urlencoded_by_category($category_ID);
                 //装箱
-                $nav[$key]["name"] = $category_name;
-                $nav[$key]["title"] = $category_title;
-                $nav[$key]["products"] = $products;
+                $nav[$key*1000]["name"] = $category_name;
+                $nav[$key*1000]["title"] = $category_title;
+                $nav[$key*1000]["products"] = $products;
             }
             else{
                 $products = $this->SpecService->all_onlyNameTitle_urlencoded_by_category_like($category_ID,'MI %');
