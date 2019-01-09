@@ -7,46 +7,19 @@ require_once "util".DIRECTORY_SEPARATOR."fn.php";
 require_once "dao".DIRECTORY_SEPARATOR."ProductSpecItemDao.php";
 require_once "dao".DIRECTORY_SEPARATOR."ProductSpecDao.php";
 
+//请求参数
+$product_category_title = $_GET["product_category_title"];//产品类别中文名称
+$dataType = $_GET["dataType"];//导入参数 or 参数项依据
+
 //region 公共资源
 $ChinesePinyin = new ChinesePinyin();
 $SpecItemDAO = new ProductSpecItemDao();
 $ProductSpecDao = new ProductSpecDao();
 $xlsxPath = "";
 $product_category_ID = 0;
-
-//确定提取文件
-if('手机'===$_GET["product_category_title"]&&'specItem'===$_GET["dataType"]){
-    $xlsxPath = "e:/phone.xlsx";
-}elseif ('手机'===$_GET["product_category_title"]&&'spec'===$_GET["dataType"]){
-    $xlsxPath = "e:/phone_data.xlsx";
-}
-
-//确定产品分类 ID
-switch ($_GET["product_category_title"]){
-    case "手机" : $product_category_ID = 1;break;
-}
-
-$reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
-$reader->setReadDataOnly(TRUE);
-$spreadsheet = $reader->load($xlsxPath);
-$worksheet = $spreadsheet->getActiveSheet();
-//endregion
-
-//region 测试代码
-echo "<pre>";
-var_dump($_GET);
-var_dump($xlsxPath);
-/**
- * @param $worksheet
- * @param $product_category_ID
- * @param $ChinesePinyin
- * @param $ProductSpecDao
- */
-
-
+$sheetIndex = 0 ;
 
 //endregion
-
 
 function importSpecDatas($worksheet, $product_category_ID, $ChinesePinyin, $ProductSpecDao)
 {
@@ -138,6 +111,7 @@ function pojos_specItem($worksheet, $product_category_ID){
     global $ChinesePinyin;
     $level1s = array();
     $level1 = null;
+    //$product_category_ID 为产品分类 ID 手机为1，电视为2，盒子为3
     $level1Title = "";$level1ID = $product_category_ID*100;
     $level2Title = "";$level2ID = $product_category_ID*1000;
     //多行数据
@@ -207,16 +181,56 @@ function importSpectItemToDB($product_category_ID){
 }
 
 //region 执行区
-//importSpectItemToDB(1);
-//importSpecDatas($worksheet, $product_category_ID, $ChinesePinyin, $ProductSpecDao);
-//showSpectItem($worksheet);
+
+switch ($product_category_title){
+    case "手机" :
+        $product_category_ID = 1;//产品类别 ID
+        if('specItem'===$dataType){//确定提取文件
+            $xlsxPath = "e:/phone.xlsx";
+        }else{
+            $xlsxPath = "e:/phone_data.xlsx"; //'spec'=== $dataType
+        }
+        break;
+    case "电视":
+        $product_category_ID = 2;//产品类别 ID
+        $xlsxPath = "E:/电视盒子全机型参数表汇总.xlsx";
+        $xlsxPath = iconv("UTF-8", "GBK//IGNORE",$xlsxPath);
+        $sheetIndex = 0;
+        break;
+    case "盒子":
+        $product_category_ID = 3;//产品类别 ID
+        $xlsxPath = "E:/电视盒子全机型参数表汇总.xlsx";
+        $xlsxPath = iconv("UTF-8", "GBK//IGNORE",$xlsxPath);
+        $sheetIndex = 1;
+        break;
+}
+
+$reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
+$reader->setReadDataOnly(TRUE);
+$spreadsheet = $reader->load($xlsxPath);
+$worksheet = $spreadsheet->getSheet($sheetIndex);
+
+//执行的操作
+switch ($dataType){
+    case "specItem":
+        importSpectItemToDB($product_category_ID);
+        break;
+    case "spec":
+        importSpecDatas($worksheet, $product_category_ID, $ChinesePinyin, $ProductSpecDao);
+        break;
+}
+
+
 //endregion
 
-if('手机'===$_GET["product_category_title"]&&'specItem'===$_GET["dataType"]){
-    importSpectItemToDB(1);
-}elseif ('手机'===$_GET["product_category_title"]&&'spec'===$_GET["dataType"]){
-    importSpecDatas($worksheet, $product_category_ID, $ChinesePinyin, $ProductSpecDao);
-}
+
+
+//region 测试代码
+echo "<pre>";
+var_dump($_GET);
+var_dump($xlsxPath);
+//showSpectItem($worksheet);
+//endregion
 ?>
 
 <?php require_once __DIR__.DIRECTORY_SEPARATOR."layout".DIRECTORY_SEPARATOR."SQL".DIRECTORY_SEPARATOR."framework.php"?>
