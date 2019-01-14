@@ -49,7 +49,7 @@ class IndexService
                 $nav[100]["name"] = $category_name;
                 $nav[100]["title"] = '小米手机';
                 $nav[100]["products"] = $products;
-                $products = $this->SpecService->all_onlyNameTitle_urlencoded_by_category_like($category_ID,'RedMI %');
+                $products = $this->SpecService->all_onlyNameTitle_urlencoded_by_category_like($category_ID,"RedMI %");
                 //装箱
                 $nav[101]["name"] = $category_name;
                 $nav[101]["title"] = '红米手机';

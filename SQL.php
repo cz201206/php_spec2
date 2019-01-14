@@ -20,7 +20,7 @@ $product_category_ID = 0;
 $sheetIndex = 0 ;
 
 //endregion
-
+/*
 function importSpecDatas($worksheet, $product_category_ID, $ChinesePinyin, $ProductSpecDao)
 {
     $count = 0;//列计数
@@ -192,7 +192,7 @@ function importSpectItemToDB($product_category_ID){
             echo "导入：$pojo2->title<br/>";
         }
     }
-}
+}*/
 
 //region 执行区
 
