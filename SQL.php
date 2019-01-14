@@ -41,7 +41,7 @@ function importSpecDatas($worksheet, $product_category_ID, $ChinesePinyin, $Prod
         $pojo = new SpecPojo();
         //$pojo->$ID;
         $pojo->product_category_ID = $product_category_ID;
-        $pojo->rank = $rankPartner - $count;
+        $pojo->rank = $count;
         $pojo->title = $worksheet->getCell($coordinate_model)->getValue();
         $pojo->name = $ChinesePinyin->TransformWithoutTonedeleteCode($pojo->title);
         $cellIterator = $column->getCellIterator();
@@ -199,11 +199,9 @@ function importSpectItemToDB($product_category_ID){
 switch ($product_category_title){
     case "手机" :
         $product_category_ID = 1;//产品类别 ID
-        if('specItem'===$dataType){//确定提取文件
-            $xlsxPath = "e:/phone.xlsx";
-        }else{
-            $xlsxPath = "e:/phone_data.xlsx"; //'spec'=== $dataType
-        }
+        $xlsxPath .= "全机型参数表参数项.xlsx";
+        $xlsxPath = iconv("UTF-8", "GBK//IGNORE",$xlsxPath);
+        $sheetIndex = 0;
         break;
     case "电视":
         $product_category_ID = 2;//产品类别 ID

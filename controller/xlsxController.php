@@ -12,6 +12,9 @@ switch (@$_POST["action"]){
         $service->iterate($path);
         require_once dirname(__DIR__).DIRECTORY_SEPARATOR."view".DIRECTORY_SEPARATOR."xlsx".DIRECTORY_SEPARATOR."iterate.php";
         break;
+    case "insert":
+        require_once dirname(__DIR__).DIRECTORY_SEPARATOR."view".DIRECTORY_SEPARATOR."xlsx".DIRECTORY_SEPARATOR."insert.php";
+        break;
 
 }
 
