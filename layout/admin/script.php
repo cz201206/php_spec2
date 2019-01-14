@@ -17,7 +17,7 @@
 
 <script type="text/javascript">//函数执行
 
-    drawCircle_icon();
+    //drawCircle_icon();
 
 </script>
 
@@ -46,6 +46,8 @@
             $("#content").load(url,data);
         }
     );
+
+
 
 </script>
 

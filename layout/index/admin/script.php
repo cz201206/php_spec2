@@ -156,8 +156,8 @@
     }
 
     //填充机型 填充照片
-    function fillData(device_name,struct,data) {
-        $("#img").attr("src","data/img/shouji/"+device_name+".png");
+    function fillData(device_name,struct,data,category) {
+        $("#img").attr("src","data/img/"+category+"/"+device_name+".png");
 //        $("#jixing").next().html(data["jixing"]);
         $("#jixing").html(data["jixing"]);
 
@@ -222,7 +222,7 @@
                     $.get(url_data, function(result){
                         data = result;
                         jixing = name;
-                        fillData(name,struct,data);
+                        fillData(name,struct,data,category);
                     });
 
                     //显示图片
@@ -405,7 +405,7 @@
 
         $.get(url_data, function(result){
             data = result;
-            fillData(name,struct,data);
+            fillData(name,struct,data,category);
             jixing = name;
             //显示图片
             showFigure(data);

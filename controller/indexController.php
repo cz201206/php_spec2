@@ -15,4 +15,17 @@ switch (@$_POST["action"]){
         echo "响应3dNames";
         $service->f3dName();
         break;
+
+    case "iterate":
+        echo "响应3dNames";
+        $service->f3dName();
+        break;
+    case "insert":
+        echo "响应3dNames";
+        $service->f3dName();
+        break;
+    case "update":
+        echo "响应3dNames";
+        $service->f3dName();
+        break;
 }

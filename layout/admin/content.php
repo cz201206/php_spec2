@@ -31,6 +31,9 @@
             </button>
         </div>
         <div class="col-6">
+            <div id="xlsx">
+                <?php require_once  __DIR__.DIRECTORY_SEPARATOR."content_xlsx.php" ?>
+            </div>
             <div id="content"></div>
         </div>
         <div class="col-3">

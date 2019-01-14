@@ -7,9 +7,9 @@
 <!--绘制圆图标-->
 <script type="text/javascript">//对象获取，变量声明定义
     //canvas jquery 对象
-    var canvas_Navbar = $("#canvas_Navbar");
+    //var canvas_Navbar = $("#canvas_Navbar");
     //canvas js 对象
-    var ctx=canvas_Navbar[0].getContext("2d");
+    //var ctx=canvas_Navbar[0].getContext("2d");
 
     var table = null;
     var current_index_td = 1;
@@ -216,7 +216,7 @@
 
         $.get(url_data, function(result){
             data = result;
-            fillData(name,struct,data);
+            fillData(name,struct,data,category);
         });
 //        $("#example").css("display","none");
         $(".cz_search_result").addClass("invisible");
@@ -266,12 +266,12 @@
     }
     //填充数据
     //填充机型 填充照片
-    function fillData(device_name,struct,data) {
+    function fillData(device_name,struct,data ,category) {
         if(current_index_td===1){
-            $("#img1").attr("src","data/img/shouji/"+device_name+".png");
+            $("#img1").attr("src","data/img/"+category+"/"+device_name+".png");
             $("#title").next().html(data["jixing"]);
         }else{
-            $("#img2").attr("src","data/img/shouji/"+device_name+".png");
+            $("#img2").attr("src","data/img/"+category+"/"+device_name+".png");
             $("#title").next().next().html(data["jixing"]);
             //启用 checkbox
            //enableInput($(":checkbox"));
@@ -392,7 +392,7 @@
 
         $.get(url_data, function(result){
             data = result;
-            fillData(name,struct,data);
+            fillData(name,struct,data,category);
         });
     });
 </script>
