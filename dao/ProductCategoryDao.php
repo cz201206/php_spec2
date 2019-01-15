@@ -48,5 +48,13 @@
             $SQL = "SELECT COUNT(*) count FROM product_category WHERE ID>=0;";
             return $this->query_toArray($SQL,null,null);
         }
+
+        //单个数据
+        function find($ID){
+            $SQL = "SELECT `ID`, `name`, `title`, `rank` FROM `product_category` WHERE `ID` = ? ";
+            $params_types = "i";
+            $params = array($ID);
+            return $this->query_toArray($SQL,$params_types,$params);
+        }
     }
 ?>

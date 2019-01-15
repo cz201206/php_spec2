@@ -36,6 +36,9 @@ class ProductCategoryService
         }
         return $pojos;
     }
+    function find($ID){
+        return $this->dao->find($ID);
+    }
 
     public function all_onlyNameTile_urlencoded(){
 

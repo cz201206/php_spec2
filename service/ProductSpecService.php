@@ -114,5 +114,23 @@ class ProductSpecService
             echo "<a href='file://$dir$name'>$title</a><br>";
         }
     }
+    function publish_single(){
+        $ID = $_POST['ID'];
+        $categoryID = $_POST['product_category_ID'];
+        $category = $this->ProductCategoryService->find($categoryID);
+        $category_name = $category[0]["name"];
+
+        $dir = dirname(__DIR__).DIRECTORY_SEPARATOR."data".DIRECTORY_SEPARATOR.$category_name.DIRECTORY_SEPARATOR;
+        if (!file_exists($dir)){
+            mkdir ($dir,0777,true);
+        }
+        $pojo = $this->pojo($ID);
+        $title = $pojo["title"];
+        $name = $this->ChinesePinyin->TransformWithoutTonedeleteCode($title).".json";
+        $file = "$dir$name";
+        file_put_contents($file,$pojo["spec"]);
+        echo "<a href='file://$dir$name'>$title</a><br>";
+
+    }
 
 }

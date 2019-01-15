@@ -52,6 +52,10 @@ switch (@$_POST["action"]){
         $service->publish();
         break;
 
+    case "publish_single":
+        $service->publish_single();
+        break;
+
     case "XX":
 
         break;
