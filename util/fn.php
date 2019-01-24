@@ -10,9 +10,11 @@ function json($post){
     foreach ( $post as $key => $value ) {
         if(is_array($value)){
             foreach ( $value as $key2 => $value2 ) {
+                $value2 = str_replace('"','\"',$value2);
                 $post[$key][$key2] = urlencode ( $value2 );
             }
         }else{
+            $value = str_replace('"','\"',$value);
             $post[$key] = urlencode ( $value );
         }
     }

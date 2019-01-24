@@ -57,6 +57,10 @@ class ProductSpecService
         return $this->dao->all_onlyNameTitle_urlencoded_by_category($product_category_ID);
     }
 
+    function all_onlyNameTitle_urlencoded_by_category_asc($category_ID){
+        return $this->dao->all_onlyNameTitle_urlencoded_by_category_asc($category_ID);
+    }
+
     function all_onlyNameTitle_urlencoded_by_category_like($product_category_ID,$like){
         return $this->dao->all_onlyNameTitle_urlencoded_by_category_like($product_category_ID,$like);
     }

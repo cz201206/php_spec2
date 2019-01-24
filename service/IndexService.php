@@ -36,14 +36,8 @@ class IndexService
             $category_name = $category->name;
             $category_title = $category->title;
             $products = null;
-            if(1!=$category_ID){
-                $products = $this->SpecService->all_onlyNameTitle_urlencoded_by_category($category_ID);
-                //装箱
-                $nav[$key+1000]["name"] = $category_name;
-                $nav[$key+1000]["title"] = $category_title;
-                $nav[$key+1000]["products"] = $products;
-            }
-            else{
+
+            if(1==$category_ID){
                 $products = $this->SpecService->all_onlyNameTitle_urlencoded_by_category_like($category_ID,'MI %');
                 //装箱
                 $nav[100]["name"] = $category_name;
@@ -67,6 +61,18 @@ class IndexService
                 $nav[103]["title"] = "第三方手机";
                 $nav[103]["products"] = $products;
 
+            } else if(5 ==$category_ID){
+                $products = $this->SpecService->all_onlyNameTitle_urlencoded_by_category_asc($category_ID);
+                //装箱
+                $nav[500]["name"] = $category_name;
+                $nav[500]["title"] = $category_title;
+                $nav[500]["products"] = $products;
+            } else {
+                $products = $this->SpecService->all_onlyNameTitle_urlencoded_by_category($category_ID);
+                //装箱
+                $nav[$key+1000]["name"] = $category_name;
+                $nav[$key+1000]["title"] = $category_title;
+                $nav[$key+1000]["products"] = $products;
             }
 
         }

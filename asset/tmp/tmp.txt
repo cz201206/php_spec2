@@ -1,0 +1,1 @@
+SELECT title ,name FROM `product_spec` WHERE product_category_ID=5 order by id
