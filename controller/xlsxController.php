@@ -16,9 +16,12 @@ switch (@$_POST["action"]){
         $service->iterate($path);
         require_once dirname(__DIR__).DIRECTORY_SEPARATOR."view".DIRECTORY_SEPARATOR."xlsx".DIRECTORY_SEPARATOR."iterate.php";
         break;
-    case "insert":
-
-        $service->insert($XlsxPojo);
+    case "import":
+        $service->import($XlsxPojo);
+        require_once dirname(__DIR__).DIRECTORY_SEPARATOR."view".DIRECTORY_SEPARATOR."xlsx".DIRECTORY_SEPARATOR."insert.php";
+        break;
+    case "importStruct":
+        $service->importStruct($XlsxPojo);
         require_once dirname(__DIR__).DIRECTORY_SEPARATOR."view".DIRECTORY_SEPARATOR."xlsx".DIRECTORY_SEPARATOR."insert.php";
         break;
 

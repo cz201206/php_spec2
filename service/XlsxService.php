@@ -37,6 +37,8 @@ class XlsxService
         if(false !==strpos($path,'shouji'))return 1;
         else if(false !==strpos($path,'dianshi'))return 2;
         else if(false !==strpos($path,'hezi'))return 3;
+        else if(false !==strpos($path,'luyouqi'))return 4;
+        else if(false !==strpos($path,'bijiben'))return 5;
         else return 0;
     }
     public function getFiles($dir)
@@ -91,7 +93,7 @@ class XlsxService
         }
         echo '</table>' . PHP_EOL;
     }
-    public function insert($XlsxPojo){
+    public function import($XlsxPojo){
         /*
         $title = null;
         $rank = null;
@@ -107,46 +109,17 @@ class XlsxService
         $ProductSpecDao = new ProductSpecDao();
         importSpecDatas($worksheet, $XlsxPojo->categoryID, $ChinesePinyin, $ProductSpecDao);
     }
-
-//region 旧库
-    public function addProcess($title,$rank){
-        $name = $this->ChinesePinyin->TransformWithoutTonedeleteCode($title);
-        return $this->dao->insert($title,$name,$rank);
+    public function importStruct($XlsxPojo){
+        $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
+        $reader->setReadDataOnly(TRUE);
+        $spreadsheet = $reader->load($XlsxPojo->path);
+        $worksheet = $spreadsheet->getSheet(0);
+        $ChinesePinyin = new ChinesePinyin();
+        $ProductSpecDao = new ProductSpecDao();
+        importSpectItemToDB($worksheet,$XlsxPojo->categoryID);
     }
 
-    public function updateProcess($ID,$title,$rank){
-        $name = $this->ChinesePinyin->TransformWithoutTonedeleteCode($title);
-        return $this->dao->update($ID,$title,$name,$rank);
-    }
 
-    public function all(){
-        $pojos = [];
-        $array_product_category = $this->dao->all();
-        foreach ($array_product_category as $product_category ){
-            $pojos[] = new ProductCategoryPojo(
-                $product_category["ID"],
-                $product_category["name"],
-                $product_category["title"],
-                $product_category["rank"]
-            );
-        }
-        return $pojos;
-    }
-
-    public function all_onlyNameTile_urlencoded(){
-
-        $pojos = [];
-        $array_product_category = $this->dao->all_onlyNameTile_urlencoded();
-        foreach ($array_product_category as $product_category ){
-            $pojos[] = new ProductCategoryPojo(
-                $product_category["ID"],
-                $product_category["name"],
-                $product_category["title"],
-                null
-            );
-        }
-        return $pojos;
-    }
 
 }
 //endregion

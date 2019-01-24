@@ -121,7 +121,7 @@ function showSpectItem($worksheet)
     }
 }
 function pojos_specItem($worksheet, $product_category_ID){
-    global $ChinesePinyin;
+    $ChinesePinyin = new ChinesePinyin();
     $level1s = array();
     $level1 = null;
     //$product_category_ID 为产品分类 ID 手机为1，电视为2，盒子为3
@@ -186,16 +186,19 @@ function pojos_specItem($worksheet, $product_category_ID){
     }
     return $level1s;
 }
-function importSpectItemToDB($product_category_ID){
-    global $worksheet,$SpecItemDAO;
+function importSpectItemToDB($worksheet,$product_category_ID){
+    $index_l1 = 0;$index_l2 = 0;
+    $SpecItemDAO = new ProductSpecItemDao();
     $pojos = pojos_specItem($worksheet,$product_category_ID);
     foreach($pojos as $pojo){
         $SpecItemDAO->insert_import($pojo->ID,$pojo->product_category_ID,$pojo->level,$pojo->parent_ID,$pojo->rank,$pojo->title,$pojo->name);
         echo "<pre>";
-        echo "导入1：$pojo->title<br/>";
+        echo "导入1：$pojo->title<br/>";$index_l1++;
         foreach($pojo->children as $pojo2){
             $SpecItemDAO->insert_import($pojo2->ID,$pojo2->product_category_ID,$pojo2->level,$pojo2->parent_ID,$pojo2->rank,$pojo2->title,$pojo2->name);
-            echo "导入：$pojo2->title<br/>";
+            echo "导入：$pojo2->title<br/>";$index_l2++;
         }
     }
+    echo "导入一级节点数量：$index_l1<br/>";
+    echo "导入二级节点数量：$index_l2<br/>";
 }
