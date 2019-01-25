@@ -128,7 +128,10 @@ class IndexService
         $dirs = [];
         while ($file = $dir->read()){
             $currentDir = iconv("GBK","utf-8",$file);
-            $dirs[$currentDir] = $currentDir;
+            if('.'!=$currentDir && '..'!=$currentDir){
+                $dirs[$currentDir] = $currentDir;
+            }
+
         }
         /*
         unset($dirs[0]);
