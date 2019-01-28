@@ -16,9 +16,9 @@
     var current_index_td = 1;
     var current_category = "";
     var jixing = "";
-    var var3dNames = {"MI6X":"MI6X","MI8":"MI8","MI8pingmuzhiwenban":"MI8pingmuzhiwenban","MI8qingchunban":"MI8qingchunban","MI8SE":"MI8SE","MI8toumingtansuoban":"MI8toumingtansuoban","MIMAX3":"MIMAX3","MIMIX2S":"MIMIX2S","MIMIX3":"MIMIX3","MIPad4WIFI":"MIPad4WIFI","RedMI5":"RedMI5","RedMI6":"RedMI6","RedMI6Pro":"RedMI6Pro","RedMINote5":"RedMINote5","RedMIS2":"RedMIS2","\u5c0f\u7c73\u7c73\u5bb6\u7a7a\u6c14\u68c0\u6d4b\u4eea":"小米米家空气检测仪","\u9ed1\u9ca8\u6e38\u620f\u624b\u673a":"黑鲨游戏手机"};
-    var url_video = "http://10.237.32.10/portal/Video/Detail.action?id=";
-    var video = {"heishayouxishouji":"172","heishayouxishoujiHelo":"191"};
+    var var3dNames = {"heishayouxishouji":"heishayouxishouji","MI5SPlus":"MI5SPlus","MI5X":"MI5X","MI6":"MI6","MI6X":"MI6X","MI8":"MI8","MI8pingmuzhiwenban":"MI8pingmuzhiwenban","MI8qingchunban":"MI8qingchunban","MI8SE":"MI8SE","MI8toumingtansuoban":"MI8toumingtansuoban","MIMAX2":"MIMAX2","MIMAX3":"MIMAX3","MIMIX2quantaoci":"MIMIX2quantaoci","MIMIX2S":"MIMIX2S","MIMIX3":"MIMIX3","MINote3":"MINote3","MIPad4WIFI":"MIPad4WIFI","MIPlay":"MIPlay","MIX":"MIX","RedMI5":"RedMI5","RedMI6":"RedMI6","RedMI6Pro":"RedMI6Pro","RedMINote5":"RedMINote5","RedmiNote7":"RedmiNote7","RedMIS2":"RedMIS2","\u5c0f\u7c73\u7c73\u5bb6\u7a7a\u6c14\u68c0\u6d4b\u4eea":"小米米家空气检测仪"};
+    var url_video = "http://10.237.32.10/project/portal/client/videoDetail.php?ID=";
+    var video = {"heishayouxishouji":"172","heishayouxishoujiHelo":"191","RedmiNote7":"195"};
 </script>
 
 <!--方法-->
@@ -35,7 +35,8 @@
         }
         //开箱视频检测
         if(jixing in video){
-            $("#view_video_iframe").attr("src",url_video+""+video[jixing]);
+            var src = url_video+""+video[jixing];
+            $("#view_video_iframe").attr("src",src);
             $("#view_video").show();
         }
         else{

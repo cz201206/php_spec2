@@ -144,13 +144,21 @@ function pojos_specItem($worksheet, $product_category_ID){
             if ('A' === $cellColumn) {
                 //新一级出现时处理区
                 if (NULL !== $cellValue&&'参数项'!=$cellValue) {
+
+
+
                     $level1Title = $cellValue;$level1ID++;
                     $level1 = new ProductSpecItemPojo();
 
                     $level1->ID = $level1ID;
+
+                    $level1->name = $ChinesePinyin->TransformWithoutTonedeleteCode($cellValue);
+                    //将单元格内的换行替换为 <br/>
+                    if(strpos($cellValue,"\r\n") || strpos($cellValue,"\r") || strpos($cellValue,"\n")){
+                        //$cellValue = str_replace(array("\r\n", "\r", "\n"), '<br/>', $cellValue);echo "替换<br>";
+                    }
                     $level1->title = $cellValue;
                     $level1->rank = $level1ID;
-                    $level1->name = $ChinesePinyin->TransformWithoutTonedeleteCode($cellValue);
                     $level1->product_category_ID = $product_category_ID;//1为手机分类
                     $level1->parent_ID = 0;//一级节点没有父节点
                     $level1->level = 1;//一级节点没有父节点
@@ -165,14 +173,27 @@ function pojos_specItem($worksheet, $product_category_ID){
             } elseif ('B' === $cellColumn) {
                 //除去多余项
                 if('产品图'!=$cellValue&&'产品卖点'!=$cellValue){
+
                     $level2Title = $cellValue;
                     $level2ID++;
                     $level2 = new ProductSpecItemPojo();
 
                     $level2->ID = $level2ID;
-                    $level2->title = $cellValue;
-                    $level2->rank = $level2ID;
+
                     $level2->name = $ChinesePinyin->TransformWithoutTonedeleteCode($cellValue);
+                    $level2->title = $cellValue;
+                    //将单元格内的换行替换为 <br/>
+                    if(strpos($cellValue,"\r\n") || strpos($cellValue,"\r") || strpos($cellValue,"\n")){
+                        $level2->name = $ChinesePinyin->TransformWithoutTonedeleteCode($cellValue);
+                        $level2->title = str_replace(array("\r\n", "\r", "\n"), '<br/>', $cellValue);
+
+                        echo "1替换<br>";
+                        echo "$level2->name<br/>";
+                        echo "$level2->title<br/>";
+
+                    }
+
+                    $level2->rank = $level2ID;
                     $level2->product_category_ID = $product_category_ID;//1为手机分类
                     $level2->parent_ID = $level1ID;
                     $level2->level = 2;
